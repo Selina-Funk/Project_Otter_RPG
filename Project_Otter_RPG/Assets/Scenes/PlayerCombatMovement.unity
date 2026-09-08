@@ -371,7 +371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7586e2fe81114640ad6a12a18e3f23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
-  attackButtons: []
+  attackButtons:
+  - {fileID: 267338737}
+  - {fileID: 646080562}
+  - {fileID: 583108047}
+  - {fileID: 670967205}
   actionMenu: {fileID: 45590914}
 --- !u!1 &210911026
 GameObject:

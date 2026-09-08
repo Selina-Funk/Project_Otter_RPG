@@ -242,6 +242,11 @@ public class OverworldPlayerMovement : MonoBehaviour
                 if (buttonIterator > 0)
                 {
                     Debug.Log("MADE IT INTO NAVIGATION IF STATEMENT!");
+
+                    navigation.mode = Navigation.Mode.Explicit;
+                    navigation.selectOnDown = child.GetComponent<UnityEngine.UI.Button>();
+                    targetButton.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
+
                     navigation.mode = Navigation.Mode.Explicit;
                     navigation.selectOnUp = targetButton.GetComponent<UnityEngine.UI.Button>();
                     child.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
