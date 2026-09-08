@@ -87,7 +87,7 @@ public class OverworldPlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         playerActions = new PlayerActions();
-        playerActions.Overworld.Menu.performed += MenuAccess;
+        playerActions.Overworld.Menu.performed += AccessInventory;
 
     }
 
@@ -222,53 +222,21 @@ public class OverworldPlayerMovement : MonoBehaviour
         Movement();
     }
 
-    private void MenuAccess(InputAction.CallbackContext context)
+    public void DisableMovement()
     {
-        InventoryMenu InvMenu = MenuCanvas.GetComponent<InventoryMenu>();
-        InvMenu.ChangeDisplayMode();
+        IEM.onVerticalInput.RemoveListener(ReadVerticalInput);
+        IEM.onHorizontalInput.RemoveListener(ReadHorizontalInput);
+    }
 
-        if (InvMenu.GetCanSee())
-        {
-            IEM.onVerticalInput.RemoveListener(ReadVerticalInput);
-            IEM.onHorizontalInput.RemoveListener(ReadHorizontalInput);
+    public void EnableMovement()
+    {
+        IEM.onVerticalInput.AddListener(ReadVerticalInput);
+        IEM.onHorizontalInput.AddListener(ReadHorizontalInput);
+    }
 
-            GameObject buttonCont = InvMenu.GetButtonContainer();
-            int buttonIterator = 0;
-            UnityEngine.UI.Button targetButton = null;
-
-            foreach (Transform child in buttonCont.transform)
-            {
-                Navigation navigation = new Navigation();
-                if (buttonIterator > 0)
-                {
-                    navigation.mode = Navigation.Mode.Explicit;
-                    navigation.selectOnDown = child.GetComponent<UnityEngine.UI.Button>();
-                    targetButton.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
-
-                    navigation.mode = Navigation.Mode.Explicit;
-                    navigation.selectOnUp = targetButton.GetComponent<UnityEngine.UI.Button>();
-                    child.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
-                }
-                targetButton = child.GetComponent<UnityEngine.UI.Button>();
-                buttonIterator++;
-            }
-
-            if (buttonCont.transform.childCount >= 2)
-            {
-                Navigation navigation = buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>().navigation;
-                navigation.selectOnUp = buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>();
-                buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>().navigation = navigation;
-
-                navigation = buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>().navigation;
-                navigation.selectOnDown = buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>();
-                buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>().navigation = navigation;
-            }
-        }
-        else
-        {
-            IEM.onVerticalInput.AddListener(ReadVerticalInput);
-            IEM.onHorizontalInput.AddListener(ReadHorizontalInput);
-        }
+    private void AccessInventory(InputAction.CallbackContext context)
+    {
+        MenuCanvas.GetComponent<InventoryMenu>().AccessInventory();
     }
 
     private void OnEnable()

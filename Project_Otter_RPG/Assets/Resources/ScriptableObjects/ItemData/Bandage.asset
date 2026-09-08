@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb3858f40c031344974462d2b264b42, type: 3}
-  m_Name: Damage
-  m_EditorClassIdentifier: Assembly-CSharp::DamagingItem
-  itemType: 2
-  itemName: Knife
-  damage: 10
+  m_Script: {fileID: 11500000, guid: f63c8a63623b9e4418be0be8438e1d94, type: 3}
+  m_Name: Bandage
+  m_EditorClassIdentifier: Assembly-CSharp::HealingItem
+  itemType: 1
+  itemName: Bandage
+  healAmount: 10
