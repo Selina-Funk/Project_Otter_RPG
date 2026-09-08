@@ -9,13 +9,13 @@ public class InventoryMenu : MonoBehaviour
 
     [SerializeField] GameObject buttonObj;
     [SerializeField] GameObject buttonContainer;
-    private bool canSee = false;
+    private bool canSee = true;
 
     private void Awake()
     {
         playersInventory = GameObject.Find("OverworldPlayer").GetComponent<Inventory>();
 
-        this.gameObject.SetActive(canSee);
+        ChangeDisplayMode();
     }
 
     public void ChangeDisplayMode()
@@ -34,6 +34,11 @@ public class InventoryMenu : MonoBehaviour
             TextMeshProUGUI amountText = newButton.transform.Find("Amount_Text").GetComponent<TextMeshProUGUI>();
             amountText.text = item.amount.ToString();
             newButton.transform.SetParent(buttonContainer.transform);
+        }
+
+        if (buttonContainer.transform.childCount > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(buttonContainer.transform.GetChild(0).gameObject);
         }
     }
 

@@ -371,11 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7586e2fe81114640ad6a12a18e3f23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
-  moveButtons:
-  - {fileID: 267338737}
-  - {fileID: 646080562}
-  - {fileID: 583108047}
-  - {fileID: 670967205}
+  attackButtons: []
   actionMenu: {fileID: 45590914}
 --- !u!1 &210911026
 GameObject:
@@ -2593,17 +2589,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 62db6776d5ee70a43b6d5e5df0319174, type: 3}
   m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: -8784545083839296357, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_MoveAction: {fileID: 6205001922670160637, guid: 62db6776d5ee70a43b6d5e5df0319174, type: 3}
+  m_SubmitAction: {fileID: -3965148379643424614, guid: 62db6776d5ee70a43b6d5e5df0319174, type: 3}
+  m_CancelAction: {fileID: 2879858484389541864, guid: 62db6776d5ee70a43b6d5e5df0319174, type: 3}
   m_LeftClickAction: {fileID: 0}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -2946,6 +2942,7 @@ MonoBehaviour:
     looping: 0
     animOnEnd: 
     name: 
+    hasEnded: 0
   defaultAnimation: idle_combat
   hasSilhouette: 0
 --- !u!212 &2396633389628644333

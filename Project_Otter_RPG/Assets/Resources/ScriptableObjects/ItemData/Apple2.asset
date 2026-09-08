@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Apple2
   m_EditorClassIdentifier: Assembly-CSharp::HealingItem
   itemType: 1
-  itemName: Appleg
+  itemName: Bandage
   healAmount: 10

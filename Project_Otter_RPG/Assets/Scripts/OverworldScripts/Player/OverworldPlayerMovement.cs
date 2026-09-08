@@ -224,11 +224,15 @@ public class OverworldPlayerMovement : MonoBehaviour
 
     private void MenuAccess(InputAction.CallbackContext context)
     {
-        MenuCanvas.GetComponent<InventoryMenu>().ChangeDisplayMode();
+        InventoryMenu InvMenu = MenuCanvas.GetComponent<InventoryMenu>();
+        InvMenu.ChangeDisplayMode();
 
-        if (MenuCanvas.GetComponent<InventoryMenu>().GetCanSee())
+        if (InvMenu.GetCanSee())
         {
-            GameObject buttonCont = MenuCanvas.GetComponent<InventoryMenu>().GetButtonContainer();
+            IEM.onVerticalInput.RemoveListener(ReadVerticalInput);
+            IEM.onHorizontalInput.RemoveListener(ReadHorizontalInput);
+
+            GameObject buttonCont = InvMenu.GetButtonContainer();
             int buttonIterator = 0;
             UnityEngine.UI.Button targetButton = null;
 
@@ -247,6 +251,11 @@ public class OverworldPlayerMovement : MonoBehaviour
                 targetButton = child.GetComponent<UnityEngine.UI.Button>();
                 buttonIterator++;
             }
+        }
+        else
+        {
+            IEM.onVerticalInput.AddListener(ReadVerticalInput);
+            IEM.onHorizontalInput.AddListener(ReadHorizontalInput);
         }
     }
 
