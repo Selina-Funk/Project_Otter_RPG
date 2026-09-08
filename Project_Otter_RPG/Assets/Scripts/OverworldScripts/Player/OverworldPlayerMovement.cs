@@ -241,8 +241,6 @@ public class OverworldPlayerMovement : MonoBehaviour
                 Navigation navigation = new Navigation();
                 if (buttonIterator > 0)
                 {
-                    Debug.Log("MADE IT INTO NAVIGATION IF STATEMENT!");
-
                     navigation.mode = Navigation.Mode.Explicit;
                     navigation.selectOnDown = child.GetComponent<UnityEngine.UI.Button>();
                     targetButton.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
@@ -250,11 +248,20 @@ public class OverworldPlayerMovement : MonoBehaviour
                     navigation.mode = Navigation.Mode.Explicit;
                     navigation.selectOnUp = targetButton.GetComponent<UnityEngine.UI.Button>();
                     child.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
-
-                    Debug.Log("Button Iterator Value: " + buttonIterator.ToString());
                 }
                 targetButton = child.GetComponent<UnityEngine.UI.Button>();
                 buttonIterator++;
+            }
+
+            if (buttonCont.transform.childCount >= 2)
+            {
+                Navigation navigation = buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>().navigation;
+                navigation.selectOnUp = buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>();
+                buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>().navigation = navigation;
+
+                navigation = buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>().navigation;
+                navigation.selectOnDown = buttonCont.transform.GetChild(0).GetComponent<UnityEngine.UI.Button>();
+                buttonCont.transform.GetChild(buttonCont.transform.childCount - 1).GetComponent<UnityEngine.UI.Button>().navigation = navigation;
             }
         }
         else
