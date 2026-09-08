@@ -2,6 +2,8 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CharacterController))]
 public class OverworldPlayerMovement : MonoBehaviour
@@ -223,6 +225,29 @@ public class OverworldPlayerMovement : MonoBehaviour
     private void MenuAccess(InputAction.CallbackContext context)
     {
         MenuCanvas.GetComponent<InventoryMenu>().ChangeDisplayMode();
+
+        if (MenuCanvas.GetComponent<InventoryMenu>().GetCanSee())
+        {
+            GameObject buttonCont = MenuCanvas.GetComponent<InventoryMenu>().GetButtonContainer();
+            int buttonIterator = 0;
+            UnityEngine.UI.Button targetButton = null;
+
+            foreach (Transform child in buttonCont.transform)
+            {
+                Navigation navigation = new Navigation();
+                if (buttonIterator > 0)
+                {
+                    Debug.Log("MADE IT INTO NAVIGATION IF STATEMENT!");
+                    navigation.mode = Navigation.Mode.Explicit;
+                    navigation.selectOnUp = targetButton.GetComponent<UnityEngine.UI.Button>();
+                    child.GetComponent<UnityEngine.UI.Button>().navigation = navigation;
+
+                    Debug.Log("Button Iterator Value: " + buttonIterator.ToString());
+                }
+                targetButton = child.GetComponent<UnityEngine.UI.Button>();
+                buttonIterator++;
+            }
+        }
     }
 
     private void OnEnable()

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryMenu : MonoBehaviour
 {
@@ -53,6 +54,16 @@ public class InventoryMenu : MonoBehaviour
         {
             Destroy(button);
         }
+    }
+
+    public GameObject GetButtonContainer()
+    {
+        return buttonContainer;
+    }
+
+    public bool GetCanSee()
+    {
+        return canSee;
     }
 
     private void OnEnable()

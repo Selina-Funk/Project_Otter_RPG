@@ -19,25 +19,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    Dictionary<string, ItemData> inventory;
-
-    private void Awake()
-    {
-        inventory = new Dictionary<string, ItemData>();
-    }
-
-    private void Update()
-    {
-        if (inventory.Count >= 1)
-        {
-            Debug.Log("NUMBER IN INVENTORY" + inventory.Count);
-
-            foreach (var item in inventory.Values)
-            {
-                Debug.Log("Item name: " + item.identifier.itemName);
-            }
-        }
-    }
+    Dictionary<string, ItemData> inventory = new Dictionary<string, ItemData>();
 
     /// <summary>
     /// Adds an item to the inventory either by increasing the amount or by adding a new item to the dictionary
@@ -223,6 +205,6 @@ public class Inventory : MonoBehaviour
         {
             return itemData.amount;
         }
-        return 0;
+        return -1;
     }
 }
