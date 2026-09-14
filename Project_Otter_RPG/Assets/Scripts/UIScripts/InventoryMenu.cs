@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -50,6 +51,7 @@ public class InventoryMenu : MonoBehaviour
 
         string itemName = button.transform.Find("Name_Text").GetComponent<TextMeshProUGUI>().text;
 
+        // Checks to see if the item amount is greater than one
         if (playerInventory.GetItemAmount(itemName) > 1)
         {
             playerInventory.RemoveItem(itemName);
@@ -59,34 +61,36 @@ public class InventoryMenu : MonoBehaviour
         {
             int itemIterator = 0;
             
+            // goes through each item in the players inventory and checks to see if the item used can be found
             foreach (var item in playerInventory.GetInventory())
             {
-                Debug.Log("Inventory item NAME: " + item.Value.identifier.name);
-                Debug.Log("DESIRED ITEM NAME: " + itemName);
-                Debug.Log("DO THE ITEM AND BUTTON NAME MATCH? " + item.Value.identifier.name == itemName);
                 if (item.Value.identifier.name == itemName)
                 {
-                    Debug.Log("ITEM NAME: " + item.Value.identifier.name + " | BUTTON NAME: " + itemName);
-                    Debug.Log("DO THE ITEM AND BUTTON NAME MATCH? " + item.Value.identifier.name == itemName);
-                    itemIterator++;
-                    Debug.Log("ITEM ITERATOR = " + itemIterator);
                     break;
                 }
-                itemIterator++;
+                else
+                {
+                    itemIterator++;
+                }
             }
-            Debug.Log("ITEM ITERATOR FOR INV MENU: " + itemIterator);
-            if (itemIterator == 0)
+            // Selects the next button depending on where the item is located in the menu
+            if (playerInventory.GetInventory().Count - 1 > 0)
             {
-                EventSystem.current.SetSelectedGameObject(buttonContainer.transform.GetChild(itemIterator + 1).gameObject);
+                if (itemIterator == 0)
+                {
+                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator + 1).gameObject);
+                }
+                else if (itemIterator == (GameObject.Find("My_Content").transform.childCount - 1))
+                {
+                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator - 1).gameObject);
+                }
+                else
+                {
+                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator).gameObject);
+                }
             }
-            else if (itemIterator == buttonContainer.transform.childCount)
-            {
-                EventSystem.current.SetSelectedGameObject(buttonContainer.transform.GetChild(buttonContainer.transform.childCount - 1).gameObject);
-            }
-            else
-            {
-                EventSystem.current.SetSelectedGameObject(buttonContainer.transform.GetChild(itemIterator - 1).gameObject);
-            }
+            
+            // Removes the item and button
             playerInventory.RemoveItem(itemName);
             Destroy(button);
         }
