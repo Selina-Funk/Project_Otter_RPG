@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private int playerCombatActions = 2;
     [SerializeField] private int enemyCombatActions = 1;
-    private PMovement playerMovement;
+    private PlayerCombat playerCombat;
     [SerializeField] private List<Enemy> enemyList;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private float enemyActionDelayTime = 1.0f;
@@ -78,8 +78,8 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         enemyList = new List<Enemy>();
-        playerMovement = GameObject.FindAnyObjectByType<PMovement>(FindObjectsInactive.Include);
-        playerMovement.SetPlayerActionCount(GetPlayerActions());
+        playerCombat = GameObject.FindAnyObjectByType<PlayerCombat>(FindObjectsInactive.Include);
+        playerCombat.SetPlayerActionCount(playerCombatActions);
         List<GameObject> enemyObjects = new List<GameObject>();
         float numOfEnemies = Random.Range((int)enemyRange.x, ((int)enemyRange.y) + 1);
         for (int i = 0; i < numOfEnemies; i++)
@@ -113,7 +113,7 @@ public class BattleManager : MonoBehaviour
     // Updates whether it is the player or enemies turn
     private void UpdateTurn()
     {
-        if (playersTurn == true && playerMovement.getPlayerActionCount() <= 0)
+        if (playersTurn == true && playerCombat.getPlayerActionCount() <= 0)
         {
             foreach (var enemyScript in enemyList)
             {
@@ -141,7 +141,7 @@ public class BattleManager : MonoBehaviour
             {
                 SetEnemyAction();
                 playersTurn = true;
-                playerMovement.SetPlayerActionCount(playerCombatActions);
+                playerCombat.SetPlayerActionCount(playerCombatActions);
                 ButtonManager buttonManager = GameObject.Find("Attack_Canvas").GetComponent<ButtonManager>();
                 buttonManager.ShowUIMenu(true);
             }
@@ -174,26 +174,24 @@ public class BattleManager : MonoBehaviour
     // Performs actions based on the player's action list
     private void PerformAction(InputAction.CallbackContext ctx)
     {
-        PAttack playerAttack = GameObject.Find("Player_UI").GetComponent<PAttack>();
         // Checks to make sure list is not empty
         if (canPerformActions && playersTurn)
         {
             // What to do with the movement action
             if (playerActionsTypes[0] == ActionTypes.MOVE)
             {
-                playerMovement.MovePlayer();
+                playerCombat.MovePlayer();
             }
             // What to do with the attack action
             else if (playerActionsTypes[0] == ActionTypes.ATTACK)
             {
-                if (playerAttack.Attack())
+                if (playerCombat.Attack())
                 {
                     foreach (var enemy in enemyList)
                     {
                         enemy.Death();
                     }
                     enemyList.RemoveAll(enemy => enemy.GetEnemyScriptableObject().enemyCurrentHealth <= 0);
-                    playerMovement.SetPlayerActionCount(-1);
                     ResetEnemyGrid();
                     playerActionsTypes.RemoveAt(0);
                     if (enemyList.Count <= 0)
@@ -202,6 +200,7 @@ public class BattleManager : MonoBehaviour
                     }
                 }
             }
+            playerCombat.SetPlayerActionCount(-1);
         }
     }
 
@@ -209,17 +208,16 @@ public class BattleManager : MonoBehaviour
     {
         if (GetPlayerActionTypesList().Count == 0)
         {
-            PlayerManager playerManager = GameObject.Find("Player_UI").GetComponent<PlayerManager>();
-            if (!playerManager.GetSpriteInstance().currentAnim.looping)
+            if (!playerCombat.GetSpriteInstance().currentAnim.looping)
             {
-                if (playerManager.GetSpriteInstance().currentAnim.hasEnded)
+                if (playerCombat.GetSpriteInstance().currentAnim.hasEnded)
                 {
-                    playerManager.SetCombatState(PlayerManager.CombatState.IDLE_COMBAT);
+                    playerCombat.SetCombatState(PlayerCombat.CombatState.IDLE_COMBAT);
                 }
             }
-            else if (playerManager.GetSpriteInstance().currentAnim.name != PlayerManager.CombatState.IDLE_COMBAT.ToString().ToLower())
+            else if (playerCombat.GetSpriteInstance().currentAnim.name != PlayerCombat.CombatState.IDLE_COMBAT.ToString().ToLower())
             {
-                playerManager.GetSpriteInstance().Stop(PlayerManager.CombatState.IDLE_COMBAT.ToString().ToLower());
+                playerCombat.GetSpriteInstance().Stop(PlayerCombat.CombatState.IDLE_COMBAT.ToString().ToLower());
             }
             BattleManager.GetInstance().SetCanPerformActions(false);
         }
@@ -298,8 +296,7 @@ public class BattleManager : MonoBehaviour
         }
         if (playerActionsTypes.Count == 2)
         {
-            PlayerManager playerManager = GameObject.Find("Player_UI").GetComponent<PlayerManager>();
-            playerManager.SetCombatState(PlayerManager.CombatState.THINKING_COMBAT);
+            playerCombat.SetCombatState(PlayerCombat.CombatState.THINKING_COMBAT);
         }
     }
 
