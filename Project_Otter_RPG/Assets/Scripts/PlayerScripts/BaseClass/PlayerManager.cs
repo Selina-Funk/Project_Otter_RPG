@@ -31,7 +31,6 @@ public class PlayerManager : MonoBehaviour
     {
         spriteInstance = gameObject.GetComponent<SpriteInstance>();
         characterData = Resources.Load<PlayableCharacterData>("ScriptableObjects/PlayableCharacterData/HarteData");
-        playerActions = new PlayerActions();
         characterData.characterCurrentHealth = characterData.characterMaxHealth;
         healthBar = GameObject.Find("Harte_Health_Bar").GetComponent<HealthBarUI>();
         healthBar.SetHaxHealth(characterData.characterMaxHealth);
@@ -40,6 +39,7 @@ public class PlayerManager : MonoBehaviour
     public virtual void Init(PlayerSystems system)
     {
         this.playerManager = system;
+        playerActions = new PlayerActions();
         playerActions.Enable();
     }
 

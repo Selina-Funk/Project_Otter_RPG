@@ -66,6 +66,9 @@ public class BattleManager : MonoBehaviour
     {
         CreateInstance();
 
+        GameObject attackCanvas = GameObject.FindAnyObjectByType<ButtonManager>(FindObjectsInactive.Include).gameObject;
+        attackCanvas.SetActive(true);
+
         // Gets the Player Actions for clicking
         playerActions = new PlayerActions();
         playerActions.Combat.ConfirmAction.performed += PerformAction;
@@ -75,7 +78,7 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         enemyList = new List<Enemy>();
-        playerMovement = GameObject.Find("Player_UI").GetComponent<PMovement>();
+        playerMovement = GameObject.FindAnyObjectByType<PMovement>(FindObjectsInactive.Include);
         playerMovement.SetPlayerActionCount(GetPlayerActions());
         List<GameObject> enemyObjects = new List<GameObject>();
         float numOfEnemies = Random.Range((int)enemyRange.x, ((int)enemyRange.y) + 1);
@@ -337,6 +340,7 @@ public class BattleManager : MonoBehaviour
 
     private void OnEnable()
     {
+
         playerActions.Enable();
     }
 

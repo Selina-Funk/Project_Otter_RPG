@@ -34,6 +34,7 @@ public class PMovement : PlayerManager
         base.Init(system);
         gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
         base.playerActions.Combat.AddTileMovement.performed += AddTileMovement;
+        StartGame();
     }
 
     public override void Tick()
@@ -51,7 +52,7 @@ public class PMovement : PlayerManager
 
     public void Start()
     {
-        StartGame();
+        
     }
 
     private void StartGame()
