@@ -11,19 +11,19 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private List<GameObject> attackButtons = new List<GameObject>();
     [SerializeField] private GameObject actionMenu;
 
-    // Adds move action to the actionTypes List in GameManager
+    // Adds move action to the actionTypes List in BattleManager
     public void MoveAction()
     {
-        GameManager.GetInstance().SetPlayerAction(GameManager.ActionTypes.MOVE);
+        BattleManager.GetInstance().SetPlayerAction(BattleManager.ActionTypes.MOVE);
         ResetActiveButton();
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count == GameManager.GetInstance().GetPlayerActions())
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count == BattleManager.GetInstance().GetPlayerActions())
         {
             ShowUIMenu(false);
-            GameManager.GetInstance().SetCanPerformActions(true);
+            BattleManager.GetInstance().SetCanPerformActions(true);
         }
     }
 
-    // Adds attack action to the actionTypes List in GameManager
+    // Adds attack action to the actionTypes List in BattleManager
     public void AttackAction()
     {
         PAttack playerAttack = GameObject.Find("Player_UI").GetComponent<PAttack>();
@@ -59,12 +59,12 @@ public class ButtonManager : MonoBehaviour
             }
         }
         gameObject.transform.Find("Action_Menu").gameObject.SetActive(true);
-        GameManager.GetInstance().SetPlayerAction(GameManager.ActionTypes.ATTACK);
+        BattleManager.GetInstance().SetPlayerAction(BattleManager.ActionTypes.ATTACK);
         ResetActiveButton();
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count == GameManager.GetInstance().GetPlayerActions())
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count == BattleManager.GetInstance().GetPlayerActions())
         {
             ShowUIMenu(false);
-            GameManager.GetInstance().SetCanPerformActions(true);
+            BattleManager.GetInstance().SetCanPerformActions(true);
         }
     }
 
@@ -86,12 +86,12 @@ public class ButtonManager : MonoBehaviour
             }
         }
         gameObject.transform.Find("Action_Menu").gameObject.SetActive(true);
-        GameManager.GetInstance().SetPlayerAction(GameManager.ActionTypes.ATTACK);
+        BattleManager.GetInstance().SetPlayerAction(BattleManager.ActionTypes.ATTACK);
         ResetActiveButton();
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count == GameManager.GetInstance().GetPlayerActions())
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count == BattleManager.GetInstance().GetPlayerActions())
         {
             ShowUIMenu(false);
-            GameManager.GetInstance().SetCanPerformActions(true);
+            BattleManager.GetInstance().SetCanPerformActions(true);
         }
     }
 
@@ -113,12 +113,12 @@ public class ButtonManager : MonoBehaviour
             }
         }
         gameObject.transform.Find("Action_Menu").gameObject.SetActive(true);
-        GameManager.GetInstance().SetPlayerAction(GameManager.ActionTypes.ATTACK);
+        BattleManager.GetInstance().SetPlayerAction(BattleManager.ActionTypes.ATTACK);
         ResetActiveButton();
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count == GameManager.GetInstance().GetPlayerActions())
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count == BattleManager.GetInstance().GetPlayerActions())
         {
             ShowUIMenu(false);
-            GameManager.GetInstance().SetCanPerformActions(true);
+            BattleManager.GetInstance().SetCanPerformActions(true);
         }
     }
 
@@ -140,12 +140,12 @@ public class ButtonManager : MonoBehaviour
             }
         }
         gameObject.transform.Find("Action_Menu").gameObject.SetActive(true);
-        GameManager.GetInstance().SetPlayerAction(GameManager.ActionTypes.ATTACK);
+        BattleManager.GetInstance().SetPlayerAction(BattleManager.ActionTypes.ATTACK);
         ResetActiveButton();
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count == GameManager.GetInstance().GetPlayerActions())
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count == BattleManager.GetInstance().GetPlayerActions())
         {
             ShowUIMenu(false);
-            GameManager.GetInstance().SetCanPerformActions(true);
+            BattleManager.GetInstance().SetCanPerformActions(true);
         }
     }
 

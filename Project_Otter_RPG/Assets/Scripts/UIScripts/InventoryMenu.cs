@@ -48,7 +48,6 @@ public class InventoryMenu : MonoBehaviour
     {
         Inventory playerInventory = GameObject.Find("OverworldPlayer").GetComponent<Inventory>();
         var button = EventSystem.current.currentSelectedGameObject;
-
         string itemName = button.transform.Find("Name_Text").GetComponent<TextMeshProUGUI>().text;
 
         // Checks to see if the item amount is greater than one
@@ -59,6 +58,7 @@ public class InventoryMenu : MonoBehaviour
         }
         else
         {
+            Transform buttonContainer = GameObject.Find("My_Content").transform;
             int itemIterator = 0;
             
             // goes through each item in the players inventory and checks to see if the item used can be found
@@ -78,15 +78,15 @@ public class InventoryMenu : MonoBehaviour
             {
                 if (itemIterator == 0)
                 {
-                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator + 1).gameObject);
+                    EventSystem.current.SetSelectedGameObject(buttonContainer.GetChild(itemIterator + 1).gameObject);
                 }
-                else if (itemIterator == (GameObject.Find("My_Content").transform.childCount - 1))
+                else if (itemIterator == (buttonContainer.childCount - 1))
                 {
-                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator - 1).gameObject);
+                    EventSystem.current.SetSelectedGameObject(buttonContainer.GetChild(itemIterator - 1).gameObject);
                 }
                 else
                 {
-                    EventSystem.current.SetSelectedGameObject(GameObject.Find("My_Content").transform.GetChild(itemIterator).gameObject);
+                    EventSystem.current.SetSelectedGameObject(buttonContainer.GetChild(itemIterator).gameObject);
                 }
             }
             

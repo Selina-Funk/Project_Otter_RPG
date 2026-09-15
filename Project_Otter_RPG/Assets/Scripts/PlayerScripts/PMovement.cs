@@ -32,7 +32,7 @@ public class PMovement : PlayerManager
     {
         // Gets the GridManager script
         base.Init(system);
-        gridManager = GameObject.Find("GameManager").GetComponent<GridManager>();
+        gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
         base.playerActions.Combat.AddTileMovement.performed += AddTileMovement;
     }
 
@@ -46,7 +46,7 @@ public class PMovement : PlayerManager
     {
         base.FixedTick();
         VisualizeMovement();
-        GameManager.GetInstance().VisualizeEnemyAttacks();
+        BattleManager.GetInstance().VisualizeEnemyAttacks();
     }
 
     public void Start()
@@ -61,7 +61,7 @@ public class PMovement : PlayerManager
 
     private void AddTileMovement(InputAction.CallbackContext context)
     {
-        if (GameManager.GetInstance().GetCanPerformActions() && GameManager.GetInstance().GetPlayerActionTypesList()[0] == GameManager.ActionTypes.MOVE)
+        if (BattleManager.GetInstance().GetCanPerformActions() && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
         {
             if (context.control.name == PlayerManager.InputKeyNames.upArrow.ToString())
             {
@@ -99,7 +99,7 @@ public class PMovement : PlayerManager
         // Places the player on a random tile
         int randomNumber = Random.Range(1, gridManager.GetPlayerTileDictionary().Count);
         Vector3 targetPosition = gridManager.GetPlayerTileDictionary()[randomNumber].gameObject.transform.position;
-        GameObject startSpawn = GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[randomNumber];
+        GameObject startSpawn = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[randomNumber];
         this.gameObject.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
         startSpawn.GetComponent<Tile>().SetCharacterOn(true);
         startSpawn.GetComponent<Tile>().SetCharacterOnTile(this.gameObject);
@@ -110,11 +110,11 @@ public class PMovement : PlayerManager
 
     public void VisualizeMovement()
     {
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count != 0 && GameManager.GetInstance().GetPlayerActionTypesList()[0] == GameManager.ActionTypes.MOVE)
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
         {
             if (potentialMoveTiles.Count == 0)
             {
-                Dictionary<int, GameObject> playerTiles = GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
+                Dictionary<int, GameObject> playerTiles = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
                 int playerKey = playerTile.Key;
 
                 // Adds the potential keys to a list of integers
@@ -173,10 +173,10 @@ public class PMovement : PlayerManager
         gridManager.ResetPlayerTileWeight();
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(chosenMoveLocation.gameObject, true), true, 1);
 
-        playerTile = new KeyValuePair<int, GameObject>(GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary().FirstOrDefault(x => x.Value == chosenMoveLocation.gameObject).Key, chosenMoveLocation.gameObject);
+        playerTile = new KeyValuePair<int, GameObject>(BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary().FirstOrDefault(x => x.Value == chosenMoveLocation.gameObject).Key, chosenMoveLocation.gameObject);
         playerActionCount--;
 
-        List<Enemy> eList = GameManager.GetInstance().GetEnemyList();
+        List<Enemy> eList = BattleManager.GetInstance().GetEnemyList();
         foreach (var removeTile in potentialMoveTiles)
         {
             removeTile.Value.gameObject.GetComponent<Image>().color = Color.green;
@@ -201,7 +201,7 @@ public class PMovement : PlayerManager
         if (chosenMoveLocation != null)
         {
             MovePlayerOnGrid();
-            GameManager.GetInstance().GetPlayerActionTypesList().RemoveAt(0);
+            BattleManager.GetInstance().GetPlayerActionTypesList().RemoveAt(0);
             chosenMoveLocation = null;
         }
     }

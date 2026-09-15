@@ -9,7 +9,7 @@ public class GraphBehavior : MonoBehaviour
     private static void ConnectEnemyTiles()
     {
         enemyTileConnection = new Graph();
-        Dictionary<int, GameObject> enemyDictionary = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
+        Dictionary<int, GameObject> enemyDictionary = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
         foreach (var obj in enemyDictionary)
         {
             if (enemyDictionary.ContainsKey(obj.Key - 4))
@@ -34,7 +34,7 @@ public class GraphBehavior : MonoBehaviour
     private static void ConnectPlayerTiles()
     {
         playerTileConnection = new Graph();
-        Dictionary<int, GameObject> enemyDictionary = GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
+        Dictionary<int, GameObject> enemyDictionary = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
         foreach (var obj in enemyDictionary)
         {
             if (enemyDictionary.ContainsKey(obj.Key - 4))

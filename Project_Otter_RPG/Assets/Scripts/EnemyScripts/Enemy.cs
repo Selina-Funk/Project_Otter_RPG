@@ -6,7 +6,7 @@ using Google.Protobuf.WellKnownTypes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static GameManager;
+using static BattleManager;
 
 public class Enemy : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        gridManager = GameObject.Find("GameManager").GetComponent<GridManager>();
+        gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
 
         instanceEnemyData = Instantiate(baseEnemyData);
 
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         do
         {
             randomNumber = Random.Range(1, (gridManager.GetEnemyGridHeight() * gridManager.GetEnemyGridHeight()));
-            startSpawn = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber];
+            startSpawn = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber];
         } while (startSpawn.GetComponent<Tile>().GetCharacterOn());
         this.gameObject.transform.position = new Vector3(startSpawn.transform.position.x, startSpawn.transform.position.y, -1.0f);
         startSpawn.GetComponent<Tile>().SetCharacterOn(true);
@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
         tilesToMoveToo.Clear();
         tilesToMoveToo = new List<int>();
         Queue<GameObject> thePath = new Queue<GameObject>();
-        Dictionary<int, GameObject> enemyGrid = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
+        Dictionary<int, GameObject> enemyGrid = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
         
 
         if (enemyGrid.TryGetValue(enemyTile.Key - 4, out GameObject tileObjectLeft))
@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
 
         gridManager.ResetEnemyTileWeight();
 
-        foreach (var enemy in GameManager.GetInstance().GetEnemyList())
+        foreach (var enemy in BattleManager.GetInstance().GetEnemyList())
         {
             if (enemy != this.gameObject)
             {
@@ -126,13 +126,13 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        foreach (var enemy in GameManager.GetInstance().GetEnemyList())
+        foreach (var enemy in BattleManager.GetInstance().GetEnemyList())
         {
             if (enemy.gameObject != this.gameObject)
             {
                 foreach (var tile in tilesToMoveToo)
                 {
-                    GraphBehavior.GetEnemyMoveWeight(GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[tile], GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[lowestValueTile], out Queue<GameObject> path);
+                    GraphBehavior.GetEnemyMoveWeight(BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[tile], BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[lowestValueTile], out Queue<GameObject> path);
                     thePath = path;
                 }
             }
@@ -149,30 +149,27 @@ public class Enemy : MonoBehaviour
         if (enemyActionCount > 0)
         {
             // Dictionary of enemy Tiles
-            Dictionary<int, GameObject> enemyTiles = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
-
-            //enemyTiles.TryGetValue(lowestValueTile, out GameObject desiredTile);
+            Dictionary<int, GameObject> enemyTiles = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
             
             // Moves the enemy object to the desired tile
             Vector3 endPosition = new Vector3(tileToMoveTo.transform.position.x, tileToMoveTo.gameObject.transform.position.y, -1.0f);
             transform.DOMove(endPosition, moveTime).SetUpdate(UpdateType.Fixed);
             enemyTile.Value.gameObject.GetComponent<Tile>().SetCharacterOn(false);
             enemyTile.Value.gameObject.GetComponent<Tile>().SetCharacterOnTile(null);
-            //enemyTile = new KeyValuePair<int, GameObject>(lowestValueTile, desiredTile);
             lowestValueTile = 1000;
         }
     }
 
     public void visualizeAttack()
     {
-        if (enemyActionTypes.Count != 0 && enemyActionTypes[0] == GameManager.ActionTypes.ATTACK && !attackVisualized)
+        if (enemyActionTypes.Count != 0 && enemyActionTypes[0] == BattleManager.ActionTypes.ATTACK && !attackVisualized)
         {
 
             if (attackTiles.Count == 0)
             {
                 foreach (var key in chosenMove[0].tileKeys)
                 {
-                    GameObject tile = GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[key + tileAttackAddition];
+                    GameObject tile = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[key + tileAttackAddition];
                     attackTiles.Add(tile);
                 }
             }
@@ -252,12 +249,12 @@ public class Enemy : MonoBehaviour
         return attackTiles;
     }
 
-    public void SetEnemyActionTypes(GameManager.ActionTypes action)
+    public void SetEnemyActionTypes(BattleManager.ActionTypes action)
     {
         enemyActionTypes.Add(action);
     }
 
-    public List<GameManager.ActionTypes> GetEnemyActionTypes()
+    public List<BattleManager.ActionTypes> GetEnemyActionTypes()
     {
         return enemyActionTypes;
     }

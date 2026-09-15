@@ -107,7 +107,7 @@ public class Graph
 
     public Queue<GameObject> Dikjstra(GameObject start, GameObject goal)
     {
-        Dictionary<int, GameObject> enemyTileDic = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
+        Dictionary<int, GameObject> enemyTileDic = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
 
         Dictionary<GameObject, GameObject> nextTileToGoal = new Dictionary<GameObject, GameObject>();
         Dictionary<GameObject, int> costToReachTile = new Dictionary<GameObject, int>();
@@ -184,11 +184,11 @@ public class Graph
 
             if (playerGraph)
             {
-                GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
+                BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
             else
             {
-                GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
+                BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
 
             var neighbors = adjacencyList.ContainsKey(current) ? adjacencyList[current] : new List<int>();
@@ -224,11 +224,11 @@ public class Graph
 
             if (playerGraph)
             {
-                GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
+                BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
             else
             {
-                GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
+                BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
 
             var neighbors = adjacencyList.ContainsKey(current) ? adjacencyList[current] : new List<int>();
@@ -243,7 +243,7 @@ public class Graph
                 {
                     frontier.Enqueue(neighbor);
                     visited[neighbor] = current;
-                    if (lowestValueTile > GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
+                    if (lowestValueTile > BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
                     {
                         lowestValueTile = current;
                     }
@@ -265,11 +265,11 @@ public class Graph
 
             if (playerGraph)
             {
-                GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
+                BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
             }
             else
             {
-                GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
+                BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
             }
 
             var neighbors = adjacencyList.ContainsKey(current) ? adjacencyList[current] : new List<int>();
@@ -302,14 +302,14 @@ public class Graph
 
             if (playerGraph)
             {
-                GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
+                BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
             }
             else
             {
-                GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
+                BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
             }
 
-            if (GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[tileToMoveTo].GetComponent<Tile>().GetTileWeight() > GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
+            if (BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[tileToMoveTo].GetComponent<Tile>().GetTileWeight() > BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
             {
                 tileToMoveTo = current;
             }
@@ -344,7 +344,7 @@ public class Graph
         {
             foreach (int tileKey in attackTiles)
             {
-                GameManager.GetInstance().GetGridManager().GetPlayerTileDictionary().TryGetValue(tileKey + addition, out GameObject tileObj);
+                BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary().TryGetValue(tileKey + addition, out GameObject tileObj);
                 tempWeight += tileObj.GetComponent<Tile>().GetTileWeight();
             }
             if (tempWeight > totalWeight)
@@ -373,7 +373,7 @@ public class Graph
 
     private void pathDicToList(ref Dictionary<int, int> previousDic, ref int goal, out List<int> tileKeys, out int weight, Enemy enemy)
     {
-        Dictionary<int, GameObject> enemyTileDictionary = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
+        Dictionary<int, GameObject> enemyTileDictionary = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary();
         List<int> pathway = new List<int>();
         int current, previous;
         current = goal;

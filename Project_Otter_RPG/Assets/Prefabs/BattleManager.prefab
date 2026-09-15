@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5870999370229592304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918590984985556987}
+  - component: {fileID: 6323471128766170437}
+  - component: {fileID: 9128510278293378298}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &918590984985556987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870999370229592304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19784, y: -0.07758, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6323471128766170437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870999370229592304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f133cab7ab10f842993a02f5838ea83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  playerCombatActions: 2
+  enemyCombatActions: 1
+  enemyList:
+  - {fileID: 0}
+  gridManager: {fileID: 9128510278293378298}
+  enemyActionDelayTime: 1
+  enemyPrefab: {fileID: 5073077942122808807, guid: 84094b5786d2afa41b2ce946c81e900a, type: 3}
+  enemyRange: {x: 2, y: 3}
+--- !u!114 &9128510278293378298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870999370229592304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a258179b040f09a42a4cb6f5cc5b97b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridManager
+  eWidth: 4
+  eHeight: 4
+  enemyGridStart: {x: 300, y: -200}
+  offset: 10
+  pWidth: 4
+  pHeight: 4
+  playerGridStart: {x: -500, y: -200}
+  tile: {fileID: 1824178825321082418, guid: e08f097064834dc468063aa2fdbdd521, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyTileTag: EnemyTile
+  playerTileTag: PlayerTile

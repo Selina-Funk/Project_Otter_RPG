@@ -42,7 +42,7 @@ public class PAttack : PlayerManager
 
     private void ChangeTileValue(InputAction.CallbackContext context)
     {
-        if (GameManager.GetInstance().GetCanPerformActions() && GameManager.GetInstance().GetPlayerActionTypesList()[0] == GameManager.ActionTypes.ATTACK && chosenMove.Count != 0)
+        if (BattleManager.GetInstance().GetCanPerformActions() && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.ATTACK && chosenMove.Count != 0)
         {
             MoveData atk = chosenMove[0];
             if (context.control.name == PlayerManager.InputKeyNames.upArrow.ToString() && (atk.rightMostTileKey + tileAddition) % 4 != 0)
@@ -66,20 +66,20 @@ public class PAttack : PlayerManager
 
     public void SeeAttackPattern()
     {
-        if (GameManager.GetInstance().GetPlayerActionTypesList().Count != 0 && GameManager.GetInstance().GetPlayerActionTypesList()[0] == GameManager.ActionTypes.ATTACK)
+        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.ATTACK)
         {
             if (attackTiles.Count == 0)
             {
                 foreach (var key in chosenMove[0].tileKeys)
                 {
-                    GameObject tile = GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[key];
+                    GameObject tile = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[key];
                     tile.GetComponent<Image>().color = Color.hotPink;
                     attackTiles.Add(tile);
                 }
             }
 
             // Sets up variables for setting the correct colors
-            GridManager gridManager = GameManager.GetInstance().GetGridManager();
+            GridManager gridManager = BattleManager.GetInstance().GetGridManager();
 
             // Gets the tiles based on the mouse's position
             if (chosenMove[0].tileKeys[0] >= 1 && tileAddition <= gridManager.GetEnemyTileDictionary().Count)
@@ -87,7 +87,7 @@ public class PAttack : PlayerManager
                 attackTiles.Clear();
 
                 // Resets tile color to red
-                GameManager.GetInstance().ResetEnemyGrid();
+                BattleManager.GetInstance().ResetEnemyGrid();
 
                 // Sets the desired tiles to hotpink for visualization purposes
                 foreach (var tileKey in gridManager.GetEnemyTileDictionary().Keys)
@@ -112,7 +112,7 @@ public class PAttack : PlayerManager
         spriteInstance.Play(PlayerManager.CombatState.ATTACK_COMBAT.ToString().ToLower());
 
         // Checks to make sure the tile is acceptable
-        if (GameManager.GetInstance().GetGridManager().GetEnemyTileDictionary().ContainsValue(attackTiles.FirstOrDefault()))
+        if (BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary().ContainsValue(attackTiles.FirstOrDefault()))
         {
             foreach (var tile in attackTiles)
             {

@@ -8,10 +8,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
 
-    private static GameManager gameManagerInstance;
+    private static BattleManager battleManagerInstance;
 
     [SerializeField] private int playerCombatActions = 2;
     [SerializeField] private int enemyCombatActions = 1;
@@ -40,24 +40,25 @@ public class GameManager : MonoBehaviour
     // Creates an instance of the Game Manager if it is not set to null
     public static void CreateInstance()
     {
-        if (gameManagerInstance == null)
+        if (battleManagerInstance != null)
         {
-            gameManagerInstance = GameObject.Find("GameManager").GetComponent<GameManager>();
+            battleManagerInstance = null;
         }
+        battleManagerInstance = GameObject.Find("BattleManager").GetComponent<BattleManager>();
     }
 
     // Allows other scripts to get the game manager script
-    public static GameManager GetInstance()
+    public static BattleManager GetInstance()
     {
-        return gameManagerInstance;
+        return battleManagerInstance;
     }
 
     // Destroys the instance
     public static void DestroyInstance()
     {
-        if (gameManagerInstance != null)
+        if (battleManagerInstance != null)
         {
-            gameManagerInstance = null;
+            battleManagerInstance = null;
         }
     }
 
@@ -217,7 +218,7 @@ public class GameManager : MonoBehaviour
             {
                 playerManager.GetSpriteInstance().Stop(PlayerManager.CombatState.IDLE_COMBAT.ToString().ToLower());
             }
-            GameManager.GetInstance().SetCanPerformActions(false);
+            BattleManager.GetInstance().SetCanPerformActions(false);
         }
     }
 

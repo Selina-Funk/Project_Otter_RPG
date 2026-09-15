@@ -15,12 +15,12 @@ public class TurnText : MonoBehaviour
 
     private void DisplayTurn()
     {
-        if (GameManager.GetInstance().GetPlayersTurn())
+        if (BattleManager.GetInstance().GetPlayersTurn())
         {
             this.gameObject.GetComponent<TextMeshProUGUI>().text = "Player's turn";
             this.gameObject.GetComponent<TextMeshProUGUI>().color = Color.lightGreen;
         }
-        else if (!GameManager.GetInstance().GetPlayersTurn())
+        else if (!BattleManager.GetInstance().GetPlayersTurn())
         {
             this.gameObject.GetComponent<TextMeshProUGUI>().text = "Enemy's turn";
             this.gameObject.GetComponent<TextMeshProUGUI>().color = Color.violetRed;
