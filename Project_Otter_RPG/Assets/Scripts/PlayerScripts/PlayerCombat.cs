@@ -23,7 +23,6 @@ public class PlayerCombat : MonoBehaviour
     private GridManager gridManager;
     [SerializeField] private Canvas attackCanvas;
 
-    // Combat Movement
     [Header("Combat Movement")]
     private KeyValuePair<int, GameObject> playerTile;
     Dictionary<int, GameObject> potentialMoveTiles = new Dictionary<int, GameObject>();

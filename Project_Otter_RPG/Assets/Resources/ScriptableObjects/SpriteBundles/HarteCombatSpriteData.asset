@@ -30,6 +30,7 @@ MonoBehaviour:
     looping: 1
     animOnEnd: 
     name: idle_combat
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: 2288058752304796988, guid: 0f250d2498b3d674899d2011ddd02294, type: 3}
@@ -44,6 +45,7 @@ MonoBehaviour:
     looping: 0
     animOnEnd: thinking_combat_middle
     name: thinking_combat
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: 6899327510486592338, guid: 3cb149ea7fd61ce43986aa39bd69b07b, type: 3}
@@ -63,6 +65,7 @@ MonoBehaviour:
     looping: 1
     animOnEnd: thinking_combat_end
     name: thinking_combat_middle
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: -458647503598191675, guid: 12a8bf7dde6be1a459aca2bc63fd09eb, type: 3}
@@ -74,6 +77,7 @@ MonoBehaviour:
     looping: 0
     animOnEnd: idle_combat
     name: thinking_combat_end
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: -3505908848300966211, guid: 32821aad8e186374f9d70fed19c7b5e2, type: 3}
@@ -88,6 +92,7 @@ MonoBehaviour:
     looping: 0
     animOnEnd: thinking_combat
     name: attack_combat
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: 4498535333871390422, guid: 1a5802f7ef23a7d4d920d318482b23c1, type: 3}
@@ -101,6 +106,7 @@ MonoBehaviour:
     looping: 0
     animOnEnd: idle_combat
     name: hit_combat
+    hasEnded: 0
   - frameSets:
     - frames:
       - {fileID: -1423996758657236719, guid: 2a6d806dfb944684d8797d889e9c20ec, type: 3}
@@ -119,3 +125,4 @@ MonoBehaviour:
     looping: 0
     animOnEnd: 
     name: death_combat
+    hasEnded: 0

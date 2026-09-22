@@ -167,6 +167,7 @@ public class SpriteInstance : MonoBehaviour
         {
             for (currentFrameIndex = 0; currentFrameIndex < currentAnim.frameSets[(int)_currentDirection].frames.Length; currentFrameIndex++)
             {
+                Debug.LogWarning("Current Direction is: " + _currentDirection);
                 if (hasSpecificFrameDelays) yield return new WaitForSeconds(currentAnim.frameDelays[currentFrameIndex]);
                 else yield return new WaitForSeconds(currentAnim.uniformFrameDelay);
             }

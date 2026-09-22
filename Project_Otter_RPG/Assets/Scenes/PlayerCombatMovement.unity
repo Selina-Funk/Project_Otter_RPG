@@ -362,34 +362,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!223 &1765505479 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-  m_PrefabInstance: {fileID: 5958932113350687664}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1930047023 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6205653580388305877, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-  m_PrefabInstance: {fileID: 5958932113350687664}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1930047033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930047023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cba5f54c4bdfba4a9f2b89285681457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackCanvas: {fileID: 1765505479}
-  playerActionCount: 0
-  moves:
-  - {fileID: 11400000, guid: 6c8fc9d1595f3aa4e8d3bfc5bc763469, type: 2}
-  - {fileID: 11400000, guid: ed302fe6fd680ac49b4cdb4668b2534e, type: 2}
-  - {fileID: 11400000, guid: 26412b59da4dcee46812d7f56f697128, type: 2}
 --- !u!1 &2117156562
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,10 +449,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 286873830531783293, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -565,18 +533,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 4527132783484927916, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7196481422666953973, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822779905405573890, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9081722762713429845, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Name
       value: Attack_Canvas
@@ -584,10 +540,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6205653580388305877, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1930047033}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
 --- !u!1001 &8635395648046672287
 PrefabInstance:
