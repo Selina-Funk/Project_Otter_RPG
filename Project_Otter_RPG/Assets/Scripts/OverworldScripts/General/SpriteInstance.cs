@@ -15,6 +15,7 @@ public class SpriteInstance : MonoBehaviour
 
     [Header("References")]
     public SpriteBundleData bundleData;
+    [SerializeField] private bool usesBillboard = true;
 
     [Tooltip("For renderers that need to be synced with the main sprite")]
     [SerializeField] private Renderer[] additionalRenderers;
@@ -167,7 +168,6 @@ public class SpriteInstance : MonoBehaviour
         {
             for (currentFrameIndex = 0; currentFrameIndex < currentAnim.frameSets[(int)_currentDirection].frames.Length; currentFrameIndex++)
             {
-                Debug.LogWarning("Current Direction is: " + _currentDirection);
                 if (hasSpecificFrameDelays) yield return new WaitForSeconds(currentAnim.frameDelays[currentFrameIndex]);
                 else yield return new WaitForSeconds(currentAnim.uniformFrameDelay);
             }
@@ -183,5 +183,10 @@ public class SpriteInstance : MonoBehaviour
     public void SetAnimationOnEnd(string endAnimation)
     {
         currentAnim.animOnEnd = endAnimation;
+    }
+
+    public bool GetUsesBillboard()
+    {
+        return usesBillboard;
     }
 }

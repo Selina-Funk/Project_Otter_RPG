@@ -14615,6 +14615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteInstance
   bundleData: {fileID: 11400000, guid: dc75675fcd2ccf7428d26821148e11de, type: 2}
+  usesBillboard: 1
   additionalRenderers: []
   currentAnim:
     frameSets: []
@@ -25444,6 +25445,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2023502182}
     m_Modifications:
     - target: {fileID: 636180068223715284, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: usesBillboard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 636180068223715284, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: currentAnim.frameSets.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -25529,6 +25534,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524213196666696717, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1418005816}
+    - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661709644118377700, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9081722762713429845, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}

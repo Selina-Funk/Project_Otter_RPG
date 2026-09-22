@@ -55,6 +55,7 @@ public class BillboardManager : MonoBehaviour
     {
         foreach (var instance in spriteInstances)
         {
+            if (!instance.GetUsesBillboard()) continue;
             Vector3 facingAngle = instance.transform.parent.forward;
             Vector3 dirToCamera = (cam.transform.position - instance.transform.position).normalized;
 
