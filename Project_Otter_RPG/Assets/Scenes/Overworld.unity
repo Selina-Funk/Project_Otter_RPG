@@ -25456,6 +25456,22 @@ PrefabInstance:
       propertyPath: currentAnim.frameSets.Array.data[0].frames.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1427565627165616948, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427565627165616948, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427565627165616948, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -524.8745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427565627165616948, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -153.8129
+      objectReference: {fileID: 0}
     - target: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -25551,6 +25567,10 @@ PrefabInstance:
     - target: {fileID: 3661709644118377700, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128274687464137228, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9081722762713429845, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Name

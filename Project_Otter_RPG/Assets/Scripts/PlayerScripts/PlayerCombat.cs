@@ -87,6 +87,8 @@ public class PlayerCombat : MonoBehaviour
         BattleManager.GetInstance().VisualizeEnemyAttacks();
         SeeAttackPattern();
         Death();
+
+        this.gameObject.GetComponent<Image>().sprite = spriteInstance.currentAnim.frameSets[0].frames[spriteInstance.CurrentFrameIndex];
     }
 
 
