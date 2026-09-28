@@ -11,6 +11,11 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private List<GameObject> attackButtons = new List<GameObject>();
     [SerializeField] private GameObject actionMenu;
 
+    private void Awake()
+    {
+        EventSystem.current.SetSelectedGameObject(actionMenu.transform.GetChild(0).gameObject);
+    }
+
     // Adds move action to the actionTypes List in BattleManager
     public void MoveAction()
     {
