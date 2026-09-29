@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Combat_Transition_Circle
+  m_Name: MATI_Combat_Transition_Circle
   m_Shader: {fileID: -6465566751694194690, guid: 745534414b123524cbe88f1cbc98bf1d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -48,7 +48,7 @@ Material:
     - _Color2: {r: 1, g: 0.78665775, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8274821698656802830
+--- !u!114 &3163094418477752914
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Google.Protobuf.WellKnownTypes;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,20 +56,23 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        
+        //StartSpawn();
     }
 
     // Places the enemy on a random spot on their grid
     private void StartSpawn()
     {
         GameObject startSpawn;
+        Vector3 targetPosition;
         int randomNumber;
         do
         {
             randomNumber = Random.Range(1, (gridManager.GetEnemyGridHeight() * gridManager.GetEnemyGridHeight()));
+            targetPosition = gridManager.GetEnemyTileDictionary()[randomNumber].transform.position;
             startSpawn = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber];
         } while (startSpawn.GetComponent<Tile>().GetCharacterOn());
-        this.gameObject.transform.position = new Vector3(startSpawn.transform.position.x, startSpawn.transform.position.y, -1.0f);
+        this.gameObject.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
+        this.gameObject.transform.rotation = startSpawn.transform.rotation;
         startSpawn.GetComponent<Tile>().SetCharacterOn(true);
         startSpawn.GetComponent<Tile>().SetCharacterOnTile(this.gameObject);
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(startSpawn, false), false, instanceEnemyData.weight ,instanceEnemyData.weightDecreaseValue, ref this.lowestValueTile);

@@ -20513,7 +20513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: 4884cb56ddd0c3f48a7200f8c49d44d2, type: 2}
+  m_Material: {fileID: 2100000, guid: 918149a1b726d7043aa759a6acb92280, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -22996,9 +22996,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49254cb810318f64494b96514ad997f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatTransitionHandler
-  combatTransitionMat: {fileID: 2100000, guid: 4884cb56ddd0c3f48a7200f8c49d44d2, type: 2}
+  combatTransitionMat: {fileID: 2100000, guid: 918149a1b726d7043aa759a6acb92280, type: 2}
+  testEnemy: {fileID: 1170553342}
   transitionTime: 1
-  propertyName: _progress
+  propertyName: _Progress
   OnTransitionDone:
     m_PersistentCalls:
       m_Calls:
@@ -25804,13 +25805,29 @@ PrefabInstance:
     - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1418005816}
+      objectReference: {fileID: 235277738}
     - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_RenderMode
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661709644118377700, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3661709644118377700, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661709644118377700, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675338552029108769, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5128274687464137228, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
