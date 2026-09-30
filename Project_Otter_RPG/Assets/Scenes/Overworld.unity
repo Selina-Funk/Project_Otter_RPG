@@ -20513,7 +20513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: 918149a1b726d7043aa759a6acb92280, type: 2}
+  m_Material: {fileID: 2100000, guid: 197e615113fb26a45a3c43e266f59b22, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -22996,9 +22996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49254cb810318f64494b96514ad997f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatTransitionHandler
-  combatTransitionMat: {fileID: 2100000, guid: 918149a1b726d7043aa759a6acb92280, type: 2}
+  combatTransitionMat: {fileID: 2100000, guid: 197e615113fb26a45a3c43e266f59b22, type: 2}
   testEnemy: {fileID: 1170553342}
-  transitionTime: 1
+  transitionTime: 1.5
   propertyName: _Progress
   OnTransitionDone:
     m_PersistentCalls:

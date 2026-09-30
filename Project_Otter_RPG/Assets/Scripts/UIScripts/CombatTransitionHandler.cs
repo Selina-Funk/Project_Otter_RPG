@@ -8,7 +8,7 @@ public class CombatTransitionHandler : MonoBehaviour
 
     [SerializeField] private GameObject testEnemy;
 
-    [SerializeField] private float transitionTime = 1.0f;
+    [SerializeField] private float transitionTime = 2.0f;
 
     [SerializeField] private string propertyName = "_progress";
 
@@ -16,12 +16,12 @@ public class CombatTransitionHandler : MonoBehaviour
 
     public IEnumerator Transition()
     {
-        float currentTime = 1.0f;
+        float currentTime = transitionTime;
 
         while (currentTime > 0.0f)
         {
             currentTime -= Time.deltaTime;
-            combatTransitionMat.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+            combatTransitionMat.SetFloat(propertyName, Mathf.Clamp(currentTime, 0, transitionTime));
             yield return null;
         }
 
@@ -32,7 +32,7 @@ public class CombatTransitionHandler : MonoBehaviour
         while (currentTime < transitionTime)
         {
             currentTime += Time.deltaTime;
-            combatTransitionMat.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+            combatTransitionMat.SetFloat(propertyName, Mathf.Clamp(currentTime, 0, transitionTime));
             yield return null;
         }
 

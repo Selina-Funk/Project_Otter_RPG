@@ -54,11 +54,6 @@ public class Enemy : MonoBehaviour
         StartSpawn();
     }
 
-    private void Start()
-    {
-        //StartSpawn();
-    }
-
     // Places the enemy on a random spot on their grid
     private void StartSpawn()
     {

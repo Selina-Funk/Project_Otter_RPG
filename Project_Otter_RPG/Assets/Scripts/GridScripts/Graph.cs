@@ -395,4 +395,11 @@ public class Graph
         } while (current != previous);
         tileKeys = pathway;
     }
+
+    public AstarBFS(GameObject )
+
+    public List<GameObject> Astar()
+    {
+
+    }
 }
