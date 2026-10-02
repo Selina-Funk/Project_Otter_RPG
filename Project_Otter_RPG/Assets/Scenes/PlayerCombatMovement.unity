@@ -716,6 +716,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
+      propertyPath: enemyRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
+      propertyPath: enemyRange.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
