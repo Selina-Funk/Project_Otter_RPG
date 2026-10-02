@@ -96,6 +96,7 @@ public class GridManager : MonoBehaviour
                 currentTile.GetComponent<RectTransform>().anchoredPosition = new Vector2(enemyGridStart.x + ((rt.rect.width + offset) * i), enemyGridStart.y + ((rt.rect.height + offset) * j));
                 currentTile.name = $"EnemyTile({i},{j})";
                 currentTile.tag = enemyTileTag;
+                currentTile.GetComponent<Tile>().SetPosition(new Vector2Int(i, j));
                 currentTile.GetComponent<Tile>().init(true);
                 currentTile.GetComponent<Tile>().SetTileWeight(baseTileWeight);
                 enemyTileDictionary.Add(eTileCount, currentTile);

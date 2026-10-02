@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     Image image;
 
     [SerializeField] private int tileWeight;
+    private Vector2Int position;
 
     private void Awake()
     {
@@ -54,5 +55,15 @@ public class Tile : MonoBehaviour
     public int GetTileWeight()
     {
         return tileWeight;
+    }
+
+    public Vector2Int GetPosition()
+    {
+        return position;
+    }
+
+    public void SetPosition(Vector2Int pos)
+    {
+        position = pos;
     }
 }

@@ -396,10 +396,13 @@ public class Graph
         tileKeys = pathway;
     }
 
-    public AstarBFS(GameObject )
+    public void AstarBFS(GameObject start, GameObject end)
+    {
+
+    }
 
     public List<GameObject> Astar()
     {
-
+        return null;
     }
 }
