@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
 
     private List<int> pathwayKeys = new List<int>();
 
+    private New_Graph connectionGraph;
+
     private void Awake()
     {
         gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
@@ -50,6 +52,8 @@ public class Enemy : MonoBehaviour
 
         moveMultiplier = instanceEnemyData.attackRate;
         attackMultiplier = (1.0f - instanceEnemyData.attackRate);
+
+        connectionGraph = new New_Graph();
 
         StartSpawn();
     }

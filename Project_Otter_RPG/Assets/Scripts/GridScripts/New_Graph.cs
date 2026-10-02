@@ -16,32 +16,28 @@ public class New_Graph : MonoBehaviour
 
     private GridManager gridManager;
 
-    private void Awake()
-    {
-        gridManager = BattleManager.GetInstance().GetGridManager();
-    }
-
     public void ConnectEnemyTiles()
     {
+        gridManager = BattleManager.GetInstance().GetGridManager();
         foreach (var obj in gridManager.GetEnemyTileDictionary())
         {
             List<Tile> neighbors = new List<Tile>();
 
             if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key - 4))
             {
-                neighbors.Add(neighbors[obj.Key - 4].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key - 4].GetComponent<Tile>());
             }
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key - 1))
+            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key - 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 0)
             {
-                neighbors.Add(neighbors[obj.Key - 1].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key - 1].GetComponent<Tile>());
             }
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key + 1))
+            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key + 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 3)
             {
-                neighbors.Add(neighbors[obj.Key + 1].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key + 1].GetComponent<Tile>());
             }
             if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key + 4))
             {
-                neighbors.Add(neighbors[obj.Key + 4].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key + 4].GetComponent<Tile>());
             }
 
             if (!enemyAdjacencyList.ContainsKey(obj.Value.GetComponent<Tile>()))
@@ -53,25 +49,26 @@ public class New_Graph : MonoBehaviour
 
     public void ConnectPlayerTiles()
     {
+        gridManager = BattleManager.GetInstance().GetGridManager();
         foreach (var obj in gridManager.GetPlayerTileDictionary())
         {
             List<Tile> neighbors = new List<Tile>();
 
             if (gridManager.GetPlayerTileDictionary().ContainsKey(obj.Key - 4))
             {
-                neighbors.Add(neighbors[obj.Key - 4].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetPlayerTileDictionary()[obj.Key - 4].GetComponent<Tile>());
             }
             if (gridManager.GetPlayerTileDictionary().ContainsKey(obj.Key - 1))
             {
-                neighbors.Add(neighbors[obj.Key - 1].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetPlayerTileDictionary()[obj.Key - 1].GetComponent<Tile>());
             }
             if (gridManager.GetPlayerTileDictionary().ContainsKey(obj.Key + 1))
             {
-                neighbors.Add(neighbors[obj.Key + 1].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetPlayerTileDictionary()[obj.Key + 1].GetComponent<Tile>());
             }
             if (gridManager.GetPlayerTileDictionary().ContainsKey(obj.Key + 4))
             {
-                neighbors.Add(neighbors[obj.Key + 4].GetComponent<Tile>());
+                neighbors.Add(gridManager.GetPlayerTileDictionary()[obj.Key + 4].GetComponent<Tile>());
             }
 
             if (!playerAdjacencyList.ContainsKey(obj.Value.GetComponent<Tile>()))
@@ -131,7 +128,7 @@ public class New_Graph : MonoBehaviour
             }
         }
 
-        while (cameFrom[current] != null)
+        while (cameFrom.ContainsKey(current) && cameFrom[current] != start)
         {
             path.Add(cameFrom[current]);
             current = cameFrom[current];
