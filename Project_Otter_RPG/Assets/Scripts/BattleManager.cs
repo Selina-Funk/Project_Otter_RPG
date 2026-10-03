@@ -107,7 +107,7 @@ public class BattleManager : MonoBehaviour
 
         EndPlayerTurn();
 
-        Debug.Log("CAN PERFORM ACTION: " + canPerformActions);
+        //Debug.Log("CAN PERFORM ACTION: " + canPerformActions);
     }
 
     // Updates whether it is the player or enemies turn
