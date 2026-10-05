@@ -8,16 +8,17 @@ public class New_Graph : MonoBehaviour
     private Dictionary<Tile, List<Tile>> enemyAdjacencyList = new Dictionary<Tile, List<Tile>>(); // Enemy tiles that are next to each other and connect 
     private Dictionary<Tile, List<Tile>> playerAdjacencyList = new Dictionary<Tile, List<Tile>>(); // Player tiles that are next to each other and connect
     
-    private Dictionary<Tile, Tile> visited = new Dictionary<Tile, Tile>();
     private Dictionary<Tile, Tile> cameFrom = new Dictionary<Tile, Tile>(); // Second tile is the tile it came from
     private Dictionary<Tile, int> costSoFar = new Dictionary<Tile, int>(); // total cost at the tile
     
     private PriorityQueue<Tile> frontier;
 
     private GridManager gridManager;
+    private TestEnemy enemy;
 
-    public void ConnectEnemyTiles()
+    public void ConnectEnemyTiles(TestEnemy theEnemy)
     {
+        enemy = theEnemy;
         gridManager = BattleManager.GetInstance().GetGridManager();
         foreach (var obj in gridManager.GetEnemyTileDictionary())
         {
@@ -47,8 +48,9 @@ public class New_Graph : MonoBehaviour
         }
     }
 
-    public void ConnectPlayerTiles()
+    public void ConnectPlayerTiles(TestEnemy theEnemy)
     {
+        enemy = theEnemy;
         gridManager = BattleManager.GetInstance().GetGridManager();
         foreach (var obj in gridManager.GetPlayerTileDictionary())
         {
@@ -112,6 +114,11 @@ public class New_Graph : MonoBehaviour
             if (current == end)
             {
                 break;
+            }
+
+            if (current.GetCharacterOn() && current != enemy.GetCurrentTile())
+            {
+                continue;
             }
 
             List<Tile> neighbors = enemyAdjacencyList[current];

@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-
-using EnemyAI;
 using System.Runtime.CompilerServices;
+using EnemyAI;
 using Unity.Hierarchy;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class TestEnemy : MonoBehaviour
 {
+    [Header("Base Enemy")]
+    [SerializeField] EnemyScriptableObject baseEnemyData;
+    private EnemyScriptableObject instanceEnemyData;
     private GridManager gridManager;
+
+    [Header("Navigation Path")]
     private New_Graph connectionGraph = new New_Graph();
     private Tile currentTile;
     private Tile endTile;
 
+    [Header("Enemy AI")]
     private IEnemyState currentState;
     private MovementState movementState;
     private AttackState attackState;
@@ -26,8 +33,16 @@ public class TestEnemy : MonoBehaviour
     private float timeToMove = 3.0f;
     private float timeToAttack = 5.0f;
 
+    [Header("Enemy Attack")]
+    [SerializeField] private List<MoveData> moves = new List<MoveData>();
+    private MoveData chosenMove;
+    private bool attackVisualized = false;
+    private int tileAttackAddition;
+
     private void Awake()
     {
+        instanceEnemyData = baseEnemyData;
+
         gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
         movementState = new MovementState();
         attackState = new AttackState();
@@ -36,8 +51,8 @@ public class TestEnemy : MonoBehaviour
 
     private void Start()
     {
-        connectionGraph.ConnectEnemyTiles();
-        connectionGraph.ConnectPlayerTiles();
+        connectionGraph.ConnectEnemyTiles(this);
+        connectionGraph.ConnectPlayerTiles(this);
         StartSpawn();
     }
 
@@ -67,6 +82,7 @@ public class TestEnemy : MonoBehaviour
         currentTile = startSpawn.GetComponent<Tile>();
         int randomNumber = UnityEngine.Random.Range(16, 16);
         endTile = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber].gameObject.GetComponent<Tile>();
+        currentTile.SetCharacterOn(true);
         StartCoroutine(GoThroughPath(1.0f));
         }
 
@@ -78,7 +94,9 @@ public class TestEnemy : MonoBehaviour
             List<Tile> path = connectionGraph.AstarMove(currentTile, endTile);
             if (path.Count > 0)
             {
+                currentTile.SetCharacterOn(false);
                 currentTile = path.LastOrDefault();
+                currentTile.SetCharacterOn(true);
                 this.gameObject.transform.position = currentTile.gameObject.transform.position;
                 StartCoroutine(GoThroughPath(duration));
             }
@@ -90,6 +108,52 @@ public class TestEnemy : MonoBehaviour
         else
         {
             SetEnemyState(attackState);
+        }
+    }
+
+    public void ChoseMove()
+    {
+        int randomAttack = UnityEngine.Random.Range(0, moves.Count);
+        chosenMove = moves[randomAttack];
+    }
+
+    public void TilesToAttack()
+    {
+        int tempWeight = 0;
+        int totalWeight = 0;
+
+        for (int i = 0; i < gridManager.GetPlayerTileDictionary().Count; i++)
+        {
+            foreach (var tile in chosenMove.tileKeys)
+            {
+                if ((tile + i) % 4 == 0 && (((tile + i) - 1) % 4 == 3 || (tile + i) + 1 % 4 == 1)) break;
+                if (gridManager.GetPlayerTileDictionary().TryGetValue((tile + i), out GameObject cell))
+                {
+                    tempWeight = cell.GetComponent<Tile>().GetTileWeight();
+                }
+            }
+            if (tempWeight > totalWeight)
+            {
+                tileAttackAddition = i;
+                totalWeight = tempWeight;
+            }
+            tempWeight = 0;
+        }
+    }
+
+    public void VisualizeAttack()
+    {
+        foreach (int tileKey in chosenMove.tileKeys)
+        {
+            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.pink;
+        }
+    }
+
+    public void UnvisualizeAttack()
+    {
+        foreach (int tileKey in chosenMove.tileKeys)
+        {
+            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.green;
         }
     }
 
@@ -128,5 +192,10 @@ public class TestEnemy : MonoBehaviour
     public float GetElapsedTime()
     {
         return elapsedTime;
+    }
+
+    public Tile GetCurrentTile()
+    {
+        return currentTile;
     }
 }

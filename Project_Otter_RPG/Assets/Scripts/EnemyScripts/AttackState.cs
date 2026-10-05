@@ -14,6 +14,8 @@ namespace EnemyAI
             enemyAI.SetCanMove(false);
             enemyAI.canAttack = true;
             enemyAI.attackDebug = true;
+            enemyAI.ChoseMove();
+            enemyAI.TilesToAttack();
         }
 
         public void Update()
@@ -27,10 +29,12 @@ namespace EnemyAI
             {
                 enemyAI.canAttack = false;
             }
+            enemyAI.VisualizeAttack();
         }
 
         public void Exit()
         {
+            enemyAI.UnvisualizeAttack();
             Debug.Log("ENEMY IS EXITING IN ATTACK STATE");
             enemyAI.SetElapsedTime(0.0f);
         }

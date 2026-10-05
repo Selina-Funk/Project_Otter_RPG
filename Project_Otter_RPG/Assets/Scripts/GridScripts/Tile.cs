@@ -5,7 +5,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] Color enemyColor;
     [SerializeField] Color playerColor;
-    private bool characterOn = false;
+    [SerializeField] private bool characterOn = false;
     private GameObject characterOnTile;
     Image image;
 
