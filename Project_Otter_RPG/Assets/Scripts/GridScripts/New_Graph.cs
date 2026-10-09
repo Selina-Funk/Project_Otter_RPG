@@ -103,6 +103,7 @@ public class New_Graph : MonoBehaviour
     {
         frontier = new PriorityQueue<Tile>();
         List<Tile> path = new List<Tile>();
+        List<Tile> visited = new List<Tile>();
         Tile current = start;
         frontier.Enqueue(current, 0);
         costSoFar[current] = 0;
@@ -135,12 +136,19 @@ public class New_Graph : MonoBehaviour
             }
         }
 
-        while (cameFrom.ContainsKey(current) && cameFrom[current] != start)
+        if (cameFrom.Count > 1)
         {
-            path.Add(cameFrom[current]);
-            current = cameFrom[current];
+            path.Add(end);
+
+            while (cameFrom.ContainsKey(current) && cameFrom[current] != start)
+            {
+                path.Add(cameFrom[current]);
+                current = cameFrom[current];
+            }
         }
 
+        costSoFar.Clear();
+        cameFrom.Clear();
         return path;
     }
 }
