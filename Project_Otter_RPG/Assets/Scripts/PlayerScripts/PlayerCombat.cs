@@ -91,7 +91,6 @@ public class PlayerCombat : MonoBehaviour
         this.gameObject.GetComponent<Image>().sprite = spriteInstance.currentAnim.frameSets[0].frames[spriteInstance.CurrentFrameIndex];
     }
 
-
     #region Movement Combat
 
     private void StartGame()
@@ -434,6 +433,20 @@ public class PlayerCombat : MonoBehaviour
     public List<MoveData> GetMoves()
     {
         return moves;
+    }
+
+    public void DecreasePlayerHealth(int value)
+    {
+        characterData.characterCurrentHealth -= value;
+        Mathf.Clamp(characterData.characterCurrentHealth, 0, characterData.characterMaxHealth);
+        healthBar.SetHealth(characterData.characterCurrentHealth);
+    }
+
+    public void IncreasePlayerHealth(int value)
+    {
+        characterData.characterCurrentHealth += value;
+        Mathf.Clamp(characterData.characterCurrentHealth, 0, characterData.characterMaxHealth);
+        healthBar.SetHealth(characterData.characterCurrentHealth);
     }
 
     #endregion

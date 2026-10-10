@@ -169,6 +169,30 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        bool hitPlayableCharacter = false;
+        foreach (var tile in gridManager.GetPlayerTileDictionary().Values)
+        {
+            if (tile.GetComponent<Tile>().GetCharacterOn())
+            {
+                tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<PlayerCombat>().TakeDamage(chosenMove.attackDamage);
+                hitPlayableCharacter = true;
+            }
+        }
+        
+        attackVisualized = false;
+        
+        //if (hitPlayableCharacter)
+        //{
+        //    GameObject.Find("Player_UI").GetComponent<PlayerCombat>().DecreasePlayerHealth(chosenMove.attackDamage);
+        //}
+        //else
+        //{
+        //    return false;
+        //}
+    }
+
     public void UnvisualizeAttack()
     {
         foreach (int tileKey in chosenMove.tileKeys)

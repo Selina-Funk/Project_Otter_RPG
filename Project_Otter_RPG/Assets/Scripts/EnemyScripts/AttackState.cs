@@ -34,6 +34,7 @@ namespace EnemyAI
 
         public void Exit()
         {
+            enemyAI.Attack();
             enemyAI.UnvisualizeAttack();
             Debug.Log("ENEMY IS EXITING IN ATTACK STATE");
             enemyAI.SetElapsedTime(0.0f);
