@@ -88,3 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1923c3832ab90d049923092942041750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  baseEnemyData: {fileID: 11400000, guid: 672e70c3750fa3b43bd4bb85cfa9b281, type: 2}
+  canAttack: 0
+  attackDebug: 0
+  moves: []

@@ -101,6 +101,42 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AddTileMovementUp",
+                    "type": "Button",
+                    "id": "8a69bb0b-3582-4c7c-91d6-486e537b41c2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AddTileMovementDown",
+                    "type": "Button",
+                    "id": "195bbff0-acaa-496d-96eb-f4b381578eac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AddTileMovementRight",
+                    "type": "Button",
+                    "id": "b8b96ea5-25d9-4c04-a559-c9e0231f300b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AddTileMovementLeft",
+                    "type": "Button",
+                    "id": "c3b156f6-be9e-42c0-a3e6-38db0ffaef48",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ConfirmAction",
                     "type": "Button",
                     "id": "0b106a81-3d6a-46d1-b172-d4babd4fbb01",
@@ -196,6 +232,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "AddTileMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54481f54-1b6d-4558-9794-8c28dcd0ddb5",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddTileMovementUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99728e8e-120d-402d-81d2-278c725941c4",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddTileMovementDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef2e5a19-916f-4e58-a695-d3b71b258db6",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddTileMovementRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24f2409c-cf40-4016-a30a-36bff00122b8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddTileMovementLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

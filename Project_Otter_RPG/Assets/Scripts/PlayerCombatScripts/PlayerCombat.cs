@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -69,7 +70,11 @@ public class PlayerCombat : MonoBehaviour
         playerActions = new PlayerActions();
 
         // Movement Stuff
-        playerActions.Combat.AddTileMovement.performed += AddTileMovement;
+        //playerActions.Combat.AddTileMovement.performed += AddTileMovement;
+        playerActions.Combat.AddTileMovementUp.performed += AddTileMovementUp;
+        playerActions.Combat.AddTileMovementDown.performed += AddTileMovementDown;
+        playerActions.Combat.AddTileMovementRight.performed += AddTileMovementRight;
+        playerActions.Combat.AddTileMovementLeft.performed += AddTileMovementLeft;
 
         // Attack Stuff
         playerActions.Combat.AddTileAtk.performed += ChangeTileValue;
@@ -84,7 +89,6 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         VisualizeMovement();
-        BattleManager.GetInstance().VisualizeEnemyAttacks();
         SeeAttackPattern();
         Death();
 
@@ -111,6 +115,43 @@ public class PlayerCombat : MonoBehaviour
 
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(startSpawn, true), true, 1);
     }
+
+    private void AddTileMovementUp(InputAction.CallbackContext context)
+    {
+        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.UP))
+        {
+            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.UP];
+        }
+        MovePlayer();
+    }
+
+    private void AddTileMovementDown(InputAction.CallbackContext context)
+    {
+        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.DOWN))
+        {
+            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.DOWN];
+        }
+        MovePlayer();
+    }
+
+    private void AddTileMovementRight(InputAction.CallbackContext context)
+    {
+        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.RIGHT))
+        {
+            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.RIGHT];
+        }
+        MovePlayer();
+    }
+
+    private void AddTileMovementLeft(InputAction.CallbackContext context)
+    {
+        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.LEFT))
+        {
+            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.LEFT];
+        }
+        MovePlayer();
+    }
+
     private void AddTileMovement(InputAction.CallbackContext context)
     {
         if (BattleManager.GetInstance().GetCanPerformActions() && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
@@ -148,8 +189,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void VisualizeMovement()
     {
-        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
-        {
+        //if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
+        //{
             if (potentialMoveTiles.Count == 0)
             {
                 Dictionary<int, GameObject> playerTiles = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
@@ -193,7 +234,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 tile.GetComponent<Image>().color = Color.magenta;
             }
-        }
+        //}
     }
 
     public void MovePlayer()
@@ -202,9 +243,10 @@ public class PlayerCombat : MonoBehaviour
         if (chosenMoveLocation != null)
         {
             MovePlayerOnGrid();
-            BattleManager.GetInstance().GetPlayerActionTypesList().RemoveAt(0);
+            //BattleManager.GetInstance().GetPlayerActionTypesList().RemoveAt(0);
             chosenMoveLocation = null;
         }
+        VisualizeMovement();
     }
 
     public void MovePlayerOnGrid()
@@ -222,24 +264,23 @@ public class PlayerCombat : MonoBehaviour
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(chosenMoveLocation.gameObject, true), true, 1);
 
         playerTile = new KeyValuePair<int, GameObject>(BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary().FirstOrDefault(x => x.Value == chosenMoveLocation.gameObject).Key, chosenMoveLocation.gameObject);
-        //playerActionCount--;
 
-        List<Enemy> eList = BattleManager.GetInstance().GetEnemyList();
-        foreach (var removeTile in potentialMoveTiles)
-        {
-            removeTile.Value.gameObject.GetComponent<Image>().color = Color.green;
-            foreach (Enemy enemy in eList)
-            {
-                foreach (var eAttackTile in enemy.GetAttackTiles())
-                {
-                    if (removeTile.Value.gameObject == eAttackTile)
-                    {
-                        removeTile.Value.gameObject.GetComponent<Image>().color = Color.orange;
-                        break;
-                    }
-                }
-            }
-        }
+        //List<TestEnemy> eList = BattleManager.GetInstance().GetEnemyList();
+        //foreach (var removeTile in potentialMoveTiles)
+        //{
+        //    removeTile.Value.gameObject.GetComponent<Image>().color = Color.green;
+        //    foreach (TestEnemy enemy in eList)
+        //    {
+        //        foreach (var eAttackTile in enemy.GetAttackTiles())
+        //        {
+        //            if (removeTile.Value.gameObject == eAttackTile)
+        //            {
+        //                removeTile.Value.gameObject.GetComponent<Image>().color = Color.orange;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
         potentialMoveTiles = new Dictionary<int, GameObject>();
     }
 

@@ -187,6 +187,42 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""AddTileMovementUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a69bb0b-3582-4c7c-91d6-486e537b41c2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddTileMovementDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""195bbff0-acaa-496d-96eb-f4b381578eac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddTileMovementRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8b96ea5-25d9-4c04-a559-c9e0231f300b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddTileMovementLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3b156f6-be9e-42c0-a3e6-38db0ffaef48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ConfirmAction"",
                     ""type"": ""Button"",
                     ""id"": ""0b106a81-3d6a-46d1-b172-d4babd4fbb01"",
@@ -282,6 +318,50 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AddTileMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54481f54-1b6d-4558-9794-8c28dcd0ddb5"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTileMovementUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99728e8e-120d-402d-81d2-278c725941c4"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTileMovementDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef2e5a19-916f-4e58-a695-d3b71b258db6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTileMovementRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24f2409c-cf40-4016-a30a-36bff00122b8"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddTileMovementLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -787,6 +867,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_AddTileAtk = m_Combat.FindAction("AddTileAtk", throwIfNotFound: true);
         m_Combat_AddTileMovement = m_Combat.FindAction("AddTileMovement", throwIfNotFound: true);
+        m_Combat_AddTileMovementUp = m_Combat.FindAction("AddTileMovementUp", throwIfNotFound: true);
+        m_Combat_AddTileMovementDown = m_Combat.FindAction("AddTileMovementDown", throwIfNotFound: true);
+        m_Combat_AddTileMovementRight = m_Combat.FindAction("AddTileMovementRight", throwIfNotFound: true);
+        m_Combat_AddTileMovementLeft = m_Combat.FindAction("AddTileMovementLeft", throwIfNotFound: true);
         m_Combat_ConfirmAction = m_Combat.FindAction("ConfirmAction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1088,6 +1172,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
     private readonly InputAction m_Combat_AddTileAtk;
     private readonly InputAction m_Combat_AddTileMovement;
+    private readonly InputAction m_Combat_AddTileMovementUp;
+    private readonly InputAction m_Combat_AddTileMovementDown;
+    private readonly InputAction m_Combat_AddTileMovementRight;
+    private readonly InputAction m_Combat_AddTileMovementLeft;
     private readonly InputAction m_Combat_ConfirmAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Combat".
@@ -1108,6 +1196,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Combat/AddTileMovement".
         /// </summary>
         public InputAction @AddTileMovement => m_Wrapper.m_Combat_AddTileMovement;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/AddTileMovementUp".
+        /// </summary>
+        public InputAction @AddTileMovementUp => m_Wrapper.m_Combat_AddTileMovementUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/AddTileMovementDown".
+        /// </summary>
+        public InputAction @AddTileMovementDown => m_Wrapper.m_Combat_AddTileMovementDown;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/AddTileMovementRight".
+        /// </summary>
+        public InputAction @AddTileMovementRight => m_Wrapper.m_Combat_AddTileMovementRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/AddTileMovementLeft".
+        /// </summary>
+        public InputAction @AddTileMovementLeft => m_Wrapper.m_Combat_AddTileMovementLeft;
         /// <summary>
         /// Provides access to the underlying input action "Combat/ConfirmAction".
         /// </summary>
@@ -1144,6 +1248,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @AddTileMovement.started += instance.OnAddTileMovement;
             @AddTileMovement.performed += instance.OnAddTileMovement;
             @AddTileMovement.canceled += instance.OnAddTileMovement;
+            @AddTileMovementUp.started += instance.OnAddTileMovementUp;
+            @AddTileMovementUp.performed += instance.OnAddTileMovementUp;
+            @AddTileMovementUp.canceled += instance.OnAddTileMovementUp;
+            @AddTileMovementDown.started += instance.OnAddTileMovementDown;
+            @AddTileMovementDown.performed += instance.OnAddTileMovementDown;
+            @AddTileMovementDown.canceled += instance.OnAddTileMovementDown;
+            @AddTileMovementRight.started += instance.OnAddTileMovementRight;
+            @AddTileMovementRight.performed += instance.OnAddTileMovementRight;
+            @AddTileMovementRight.canceled += instance.OnAddTileMovementRight;
+            @AddTileMovementLeft.started += instance.OnAddTileMovementLeft;
+            @AddTileMovementLeft.performed += instance.OnAddTileMovementLeft;
+            @AddTileMovementLeft.canceled += instance.OnAddTileMovementLeft;
             @ConfirmAction.started += instance.OnConfirmAction;
             @ConfirmAction.performed += instance.OnConfirmAction;
             @ConfirmAction.canceled += instance.OnConfirmAction;
@@ -1164,6 +1280,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @AddTileMovement.started -= instance.OnAddTileMovement;
             @AddTileMovement.performed -= instance.OnAddTileMovement;
             @AddTileMovement.canceled -= instance.OnAddTileMovement;
+            @AddTileMovementUp.started -= instance.OnAddTileMovementUp;
+            @AddTileMovementUp.performed -= instance.OnAddTileMovementUp;
+            @AddTileMovementUp.canceled -= instance.OnAddTileMovementUp;
+            @AddTileMovementDown.started -= instance.OnAddTileMovementDown;
+            @AddTileMovementDown.performed -= instance.OnAddTileMovementDown;
+            @AddTileMovementDown.canceled -= instance.OnAddTileMovementDown;
+            @AddTileMovementRight.started -= instance.OnAddTileMovementRight;
+            @AddTileMovementRight.performed -= instance.OnAddTileMovementRight;
+            @AddTileMovementRight.canceled -= instance.OnAddTileMovementRight;
+            @AddTileMovementLeft.started -= instance.OnAddTileMovementLeft;
+            @AddTileMovementLeft.performed -= instance.OnAddTileMovementLeft;
+            @AddTileMovementLeft.canceled -= instance.OnAddTileMovementLeft;
             @ConfirmAction.started -= instance.OnConfirmAction;
             @ConfirmAction.performed -= instance.OnConfirmAction;
             @ConfirmAction.canceled -= instance.OnConfirmAction;
@@ -1505,6 +1633,34 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAddTileMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AddTileMovementUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAddTileMovementUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AddTileMovementDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAddTileMovementDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AddTileMovementRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAddTileMovementRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AddTileMovementLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAddTileMovementLeft(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "ConfirmAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

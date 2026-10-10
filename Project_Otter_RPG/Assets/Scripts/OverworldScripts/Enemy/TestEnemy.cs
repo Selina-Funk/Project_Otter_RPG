@@ -34,7 +34,6 @@ public class TestEnemy : MonoBehaviour
     private float timeToAttack = 5.0f;
 
     [Header("Enemy Attack")]
-    [SerializeField] private List<MoveData> moves = new List<MoveData>();
     private MoveData chosenMove;
     private bool attackVisualized = false;
     private int tileAttackAddition;
@@ -81,7 +80,6 @@ public class TestEnemy : MonoBehaviour
         startSpawn.GetComponent<Tile>().SetCharacterOnTile(this.gameObject);
         currentTile = startSpawn.GetComponent<Tile>();
         int randomNumber = UnityEngine.Random.Range(16, 16);
-        //endTile = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber].gameObject.GetComponent<Tile>();
         currentTile.SetCharacterOn(true);
         StartCoroutine(GoThroughPath(1.0f));
         }
@@ -133,8 +131,8 @@ public class TestEnemy : MonoBehaviour
 
     public void ChoseMove()
     {
-        int randomAttack = UnityEngine.Random.Range(0, moves.Count);
-        chosenMove = moves[randomAttack];
+        int randomAttack = UnityEngine.Random.Range(0, instanceEnemyData.moveList.Count);
+        chosenMove = instanceEnemyData.moveList[randomAttack];
     }
 
     public void TilesToAttack()
@@ -171,26 +169,15 @@ public class TestEnemy : MonoBehaviour
 
     public void Attack()
     {
-        bool hitPlayableCharacter = false;
         foreach (var tile in gridManager.GetPlayerTileDictionary().Values)
         {
             if (tile.GetComponent<Tile>().GetCharacterOn())
             {
                 tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<PlayerCombat>().TakeDamage(chosenMove.attackDamage);
-                hitPlayableCharacter = true;
             }
         }
         
         attackVisualized = false;
-        
-        //if (hitPlayableCharacter)
-        //{
-        //    GameObject.Find("Player_UI").GetComponent<PlayerCombat>().DecreasePlayerHealth(chosenMove.attackDamage);
-        //}
-        //else
-        //{
-        //    return false;
-        //}
     }
 
     public void UnvisualizeAttack()
