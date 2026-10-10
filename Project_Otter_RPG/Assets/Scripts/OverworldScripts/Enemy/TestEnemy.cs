@@ -81,7 +81,7 @@ public class TestEnemy : MonoBehaviour
         startSpawn.GetComponent<Tile>().SetCharacterOnTile(this.gameObject);
         currentTile = startSpawn.GetComponent<Tile>();
         int randomNumber = UnityEngine.Random.Range(16, 16);
-        endTile = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber].gameObject.GetComponent<Tile>();
+        //endTile = BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[randomNumber].gameObject.GetComponent<Tile>();
         currentTile.SetCharacterOn(true);
         StartCoroutine(GoThroughPath(1.0f));
         }
@@ -91,6 +91,7 @@ public class TestEnemy : MonoBehaviour
         if(canMove)
         {
             yield return new WaitForSeconds(duration);
+            endTile = getEndTile();
             List<Tile> path = connectionGraph.AstarMove(currentTile, endTile);
             if (path.Count > 0)
             {
@@ -102,13 +103,32 @@ public class TestEnemy : MonoBehaviour
             }
             else
             {
-                Debug.Log("ALL DONE");
+                SetEnemyState(attackState);
             }
         }
         else
         {
             SetEnemyState(attackState);
         }
+    }
+
+    private Tile getEndTile()
+    {
+        Tile endTile = null;
+        foreach (var gameObject in gridManager.GetEnemyTileDictionary().Values)
+        {
+            if (endTile == null)
+            {
+                endTile = gameObject.GetComponent<Tile>();
+            }
+
+            if (endTile.GetTileWeight() <= gameObject.GetComponent<Tile>().GetTileWeight())
+            {
+                endTile = gameObject.GetComponent<Tile>();
+            }
+        }
+
+        return endTile;
     }
 
     public void ChoseMove()

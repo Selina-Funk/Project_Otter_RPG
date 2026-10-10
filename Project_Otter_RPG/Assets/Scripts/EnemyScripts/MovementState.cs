@@ -24,6 +24,7 @@ namespace EnemyAI
             }
             else
             {
+                enemyAI.SetElapsedTime(0.0f);
                 enemyAI.SetCanMove(false);
             }
         }
