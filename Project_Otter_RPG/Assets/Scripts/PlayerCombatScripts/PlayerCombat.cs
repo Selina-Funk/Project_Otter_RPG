@@ -31,6 +31,7 @@ public class PlayerCombat : MonoBehaviour
     private float moveTime = 0.25f;
     [SerializeField] private int playerActionCount = 0;
     private GameObject chosenMoveLocation;
+    private bool canMove = true;
 
     [Header("Combat Attack")]
     [SerializeField] List<MoveData> moves = new List<MoveData>();
@@ -70,7 +71,6 @@ public class PlayerCombat : MonoBehaviour
         playerActions = new PlayerActions();
 
         // Movement Stuff
-        //playerActions.Combat.AddTileMovement.performed += AddTileMovement;
         playerActions.Combat.AddTileMovementUp.performed += AddTileMovementUp;
         playerActions.Combat.AddTileMovementDown.performed += AddTileMovementDown;
         playerActions.Combat.AddTileMovementRight.performed += AddTileMovementRight;
@@ -118,123 +118,97 @@ public class PlayerCombat : MonoBehaviour
 
     private void AddTileMovementUp(InputAction.CallbackContext context)
     {
-        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.UP))
+        if (canMove)
         {
-            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.UP];
+            if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.UP))
+            {
+                chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.UP];
+            }
+            MovePlayer();
         }
-        MovePlayer();
     }
 
     private void AddTileMovementDown(InputAction.CallbackContext context)
     {
-        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.DOWN))
+        if (canMove)
         {
-            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.DOWN];
+            if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.DOWN))
+            {
+                chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.DOWN];
+            }
+            MovePlayer();
         }
-        MovePlayer();
     }
 
     private void AddTileMovementRight(InputAction.CallbackContext context)
     {
-        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.RIGHT))
+        if (canMove)
         {
-            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.RIGHT];
+            if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.RIGHT))
+            {
+                chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.RIGHT];
+            }
+            MovePlayer();
         }
-        MovePlayer();
     }
 
     private void AddTileMovementLeft(InputAction.CallbackContext context)
     {
-        if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.LEFT))
+        if (canMove)
         {
-            chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.LEFT];
-        }
-        MovePlayer();
-    }
-
-    private void AddTileMovement(InputAction.CallbackContext context)
-    {
-        if (BattleManager.GetInstance().GetCanPerformActions() && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
-        {
-            if (context.control.name == PlayerCombat.InputKeyNames.upArrow.ToString())
+            if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.LEFT))
             {
-                if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.UP))
-                {
-                    chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.UP];
-                }
+                chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.LEFT];
             }
-            else if (context.control.name == PlayerCombat.InputKeyNames.downArrow.ToString())
-            {
-                if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.DOWN))
-                {
-                    chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.DOWN];
-                }
-            }
-            else if (context.control.name == PlayerCombat.InputKeyNames.rightArrow.ToString())
-            {
-                if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.RIGHT))
-                {
-                    chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.RIGHT];
-                }
-            }
-            else if (context.control.name == PlayerCombat.InputKeyNames.leftArrow.ToString())
-            {
-                if (potentialMoveTiles.ContainsKey((int)DirectionToMoveTile.LEFT))
-                {
-                    chosenMoveLocation = potentialMoveTiles[(int)DirectionToMoveTile.LEFT];
-                }
-            }
+            MovePlayer();
         }
     }
 
     public void VisualizeMovement()
     {
-        //if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.MOVE)
-        //{
-            if (potentialMoveTiles.Count == 0)
+        if (potentialMoveTiles.Count == 0)
+        {
+            Dictionary<int, GameObject> playerTiles = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
+            int playerKey = playerTile.Key;
+
+            // Adds the potential keys to a list of integers
+            List<int> potentialKeys = new List<int>();
+            potentialKeys.Add(playerKey - gridManager.GetPlayerGridWidth());
+
+            if ((playerTile.Key - 1) % 4 != 0)
             {
-                Dictionary<int, GameObject> playerTiles = BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary();
-                int playerKey = playerTile.Key;
-
-                // Adds the potential keys to a list of integers
-                List<int> potentialKeys = new List<int>();
-                potentialKeys.Add(playerKey - gridManager.GetPlayerGridWidth());
-
-                if ((playerTile.Key - 1) % 4 != 0)
-                {
-                    potentialKeys.Add(playerKey - 1);
-                }
-                else
-                {
-                    potentialKeys.Add(0);
-                }
-                if (playerTile.Key % 4 != 0)
-                {
-                    potentialKeys.Add(playerKey + 1);
-                }
-                else
-                {
-                    potentialKeys.Add(0);
-                }
-                potentialKeys.Add(playerKey + gridManager.GetPlayerGridWidth());
-
-                // Checks to see if each potential key is valid and adds the tile to the dictionary if the key exists
-                int key = 1;
-                foreach (var potentailKey in potentialKeys)
-                {
-                    if (playerTiles.TryGetValue(potentailKey, out GameObject tileObject))
-                    {
-                        potentialMoveTiles.Add(key, tileObject);
-                    }
-                    key++;
-                }
+                potentialKeys.Add(playerKey - 1);
             }
-
-            foreach (var tile in potentialMoveTiles.Values)
+            else
             {
-                tile.GetComponent<Image>().color = Color.magenta;
+                potentialKeys.Add(0);
             }
-        //}
+            if (playerTile.Key % 4 != 0)
+            {
+                potentialKeys.Add(playerKey + 1);
+            }
+            else
+            {
+                potentialKeys.Add(0);
+            }
+            potentialKeys.Add(playerKey + gridManager.GetPlayerGridWidth());
+
+            // Checks to see if each potential key is valid and adds the tile to the dictionary if the key exists
+            int key = 1;
+            foreach (var potentailKey in potentialKeys)
+            {
+                if (playerTiles.TryGetValue(potentailKey, out GameObject tileObject))
+                {
+                    potentialMoveTiles.Add(key, tileObject);
+                }
+                key++;
+            }
+        }
+
+        foreach (var tile in potentialMoveTiles.Values)
+        {
+            tile.GetComponent<Image>().color = Color.magenta;
+        }
     }
 
     public void MovePlayer()
@@ -243,7 +217,6 @@ public class PlayerCombat : MonoBehaviour
         if (chosenMoveLocation != null)
         {
             MovePlayerOnGrid();
-            //BattleManager.GetInstance().GetPlayerActionTypesList().RemoveAt(0);
             chosenMoveLocation = null;
         }
         VisualizeMovement();
@@ -252,6 +225,7 @@ public class PlayerCombat : MonoBehaviour
     public void MovePlayerOnGrid()
     {
         transform.DOMove(chosenMoveLocation.transform.position, moveTime).SetUpdate(UpdateType.Fixed);
+        StartCoroutine(PreventMovement(moveTime));
         CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
 
         // Changing where the player is on the tiles
@@ -265,23 +239,19 @@ public class PlayerCombat : MonoBehaviour
 
         playerTile = new KeyValuePair<int, GameObject>(BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary().FirstOrDefault(x => x.Value == chosenMoveLocation.gameObject).Key, chosenMoveLocation.gameObject);
 
-        //List<TestEnemy> eList = BattleManager.GetInstance().GetEnemyList();
-        //foreach (var removeTile in potentialMoveTiles)
-        //{
-        //    removeTile.Value.gameObject.GetComponent<Image>().color = Color.green;
-        //    foreach (TestEnemy enemy in eList)
-        //    {
-        //        foreach (var eAttackTile in enemy.GetAttackTiles())
-        //        {
-        //            if (removeTile.Value.gameObject == eAttackTile)
-        //            {
-        //                removeTile.Value.gameObject.GetComponent<Image>().color = Color.orange;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
+        foreach (var tile in potentialMoveTiles.Values)
+        {
+            tile.GetComponent<Image>().color = Color.green;
+        }
+
         potentialMoveTiles = new Dictionary<int, GameObject>();
+    }
+
+    private IEnumerator PreventMovement(float duration)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(duration);
+        canMove = true;
     }
 
     #endregion
