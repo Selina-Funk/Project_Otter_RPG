@@ -114,6 +114,8 @@ public class PlayerCombat : MonoBehaviour
         playerTile = new KeyValuePair<int, GameObject>(randomNumber, startSpawn.gameObject);
 
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(startSpawn, true), true, 1);
+
+        GameObject.Find("Attack_Canvas").GetComponent<RadialSelection>().SpawnRaidialPart();
     }
 
     private void AddTileMovementUp(InputAction.CallbackContext context)
