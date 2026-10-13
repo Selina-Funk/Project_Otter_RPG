@@ -90,7 +90,21 @@ public class GraphBehavior : MonoBehaviour
         else
         {
             ConnectEnemyTiles();
-            enemyTileConnection.ChangeTileWeights(start, playerGraph, weight, decreaseWeight, ref lowestValueTile);
+            enemyTileConnection.ChangeTileWeights(start, playerGraph, weight, decreaseWeight);
+        }
+    }
+
+    public static void ChangeWeights(int start, bool playerGraph, int weight, int decreaseWeight)
+    {
+        if (playerGraph)
+        {
+            ConnectPlayerTiles();
+            playerTileConnection.ChangeTileWeights(start, playerGraph, decreaseWeight);
+        }
+        else
+        {
+            ConnectEnemyTiles();
+            enemyTileConnection.ChangeTileWeights(start, playerGraph, weight, decreaseWeight);
         }
     }
 

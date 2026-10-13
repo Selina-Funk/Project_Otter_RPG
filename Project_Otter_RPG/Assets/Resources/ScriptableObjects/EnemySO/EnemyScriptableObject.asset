@@ -19,5 +19,5 @@ MonoBehaviour:
   moveList:
   - {fileID: 11400000, guid: 6c8fc9d1595f3aa4e8d3bfc5bc763469, type: 2}
   - {fileID: 11400000, guid: ed302fe6fd680ac49b4cdb4668b2534e, type: 2}
-  weight: 5
+  weight: 1
   weightDecreaseValue: 1

@@ -210,7 +210,7 @@ public class Graph
         Debug.Log("VISITED COUNT: " + visited.Count);
     }
 
-    public void ChangeTileWeights(int startInt, bool playerGraph, int desiredWeight, int decreaseWeight, ref int lowestValueTile)
+    public void ChangeTileWeights(int startInt, bool playerGraph, int desiredWeight, int decreaseWeight)
     {
         Dictionary<int, int> visited = new Dictionary<int, int>();
         visited[startInt] = startInt;
@@ -226,7 +226,7 @@ public class Graph
             {
                 BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
-            else
+            else if ((!playerGraph && BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().GetCharacterOn()) && visited.ContainsKey(current))
             {
                 BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weightValue * 2);
             }
@@ -243,13 +243,9 @@ public class Graph
                 {
                     frontier.Enqueue(neighbor);
                     visited[neighbor] = current;
-                    if (lowestValueTile > BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
-                    {
-                        lowestValueTile = current;
-                    }
                 }
             }
-            ChangeWeightHelpFunction(weightValue, ref frontier, ref visited, playerGraph, decreaseWeight, ref lowestValueTile);
+            ChangeEnemyWeightHelpFunction(weightValue, ref frontier, ref visited, playerGraph, decreaseWeight);
         }
         Debug.Log("VISITED COUNT: " + visited.Count);
     }
@@ -291,9 +287,9 @@ public class Graph
             ChangeWeightHelpFunction(weight, ref newFrontier, ref visited, playerGraph, weightDecreaseValue);
     }
 
-    private void ChangeWeightHelpFunction(int weight, ref Queue<int> oldFrontier, ref Dictionary<int, int> visited, bool playerGraph, int weightDecreaseValue, ref int tileToMoveTo)
+    private void ChangeEnemyWeightHelpFunction(int weight, ref Queue<int> oldFrontier, ref Dictionary<int, int> visited, bool playerGraph, int weightDecreaseValue)
     {
-        weight -= weightDecreaseValue;
+        weight += weightDecreaseValue;
         Queue<int> newFrontier = new Queue<int>();
 
         while (oldFrontier.Count > 0)
@@ -307,11 +303,6 @@ public class Graph
             else
             {
                 BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary()[current].GetComponent<Tile>().AddTileWeight(weight);
-            }
-
-            if (BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[tileToMoveTo].GetComponent<Tile>().GetTileWeight() > BattleManager.GetInstance().GetGridManager().GetPlayerTileDictionary()[current].GetComponent<Tile>().GetTileWeight())
-            {
-                tileToMoveTo = current;
             }
 
             var neighbors = adjacencyList.ContainsKey(current) ? adjacencyList[current] : new List<int>();
@@ -330,7 +321,7 @@ public class Graph
             }
         }
         if (newFrontier.Count > 0)
-            ChangeWeightHelpFunction(weight, ref newFrontier, ref visited, playerGraph, weightDecreaseValue, ref tileToMoveTo);
+            ChangeEnemyWeightHelpFunction(weight, ref newFrontier, ref visited, playerGraph, weightDecreaseValue);
     }
 
     public void enemyAttackDecision(int startIndex, int endIndex, List<int> attackTiles, out int totalWeight, out int tileAddition)

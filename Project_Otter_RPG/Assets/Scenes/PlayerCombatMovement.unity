@@ -398,41 +398,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
   m_PrefabInstance: {fileID: 5958932113350687664}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1140196714
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1140196715}
-  m_Layer: 5
-  m_Name: Radial_Menu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1140196715
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140196714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 842602378}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2117156562
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,9 +604,6 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1140196715}
-    - targetCorrespondingSourceObject: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 207611418}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
@@ -703,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 5073077942122808807, guid: 21fc40e731f69384a9bafafac545825c, type: 3}
     - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
       propertyPath: enemyRange.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
       propertyPath: enemyRange.y

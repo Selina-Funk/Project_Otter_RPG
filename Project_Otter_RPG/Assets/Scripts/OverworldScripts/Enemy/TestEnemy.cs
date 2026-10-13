@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using EnemyAI;
 using Unity.Hierarchy;
 using UnityEngine;
@@ -70,8 +71,13 @@ public class TestEnemy : MonoBehaviour
     {
         GameObject startSpawn;
         Vector2Int location = new Vector2Int(0,0);
-        BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary().TryGetValue(1, out GameObject spawn);
-        startSpawn = spawn;
+        int randomNumber;
+        do
+        {
+            randomNumber = Random.Range(1, 16);
+            BattleManager.GetInstance().GetGridManager().GetEnemyTileDictionary().TryGetValue(randomNumber, out GameObject spawn);
+            startSpawn = spawn;
+        } while (startSpawn.GetComponent<Tile>().GetCharacterOn());
 
         location = startSpawn.GetComponent<Tile>().GetPosition();
         this.gameObject.transform.position = new Vector3(startSpawn.transform.position.x, startSpawn.transform.position.y, startSpawn.transform.position.z);
@@ -79,8 +85,8 @@ public class TestEnemy : MonoBehaviour
         startSpawn.GetComponent<Tile>().SetCharacterOn(true);
         startSpawn.GetComponent<Tile>().SetCharacterOnTile(this.gameObject);
         currentTile = startSpawn.GetComponent<Tile>();
-        int randomNumber = UnityEngine.Random.Range(16, 16);
         currentTile.SetCharacterOn(true);
+        GraphBehavior.ChangeWeights(gridManager.FindTileKey(startSpawn, false), false, instanceEnemyData.weight, instanceEnemyData.weightDecreaseValue);
         StartCoroutine(GoThroughPath(1.0f));
         }
 
@@ -120,7 +126,7 @@ public class TestEnemy : MonoBehaviour
                 endTile = gameObject.GetComponent<Tile>();
             }
 
-            if (endTile.GetTileWeight() <= gameObject.GetComponent<Tile>().GetTileWeight())
+            if (endTile.GetTileWeight() < gameObject.GetComponent<Tile>().GetTileWeight())
             {
                 endTile = gameObject.GetComponent<Tile>();
             }
@@ -228,5 +234,10 @@ public class TestEnemy : MonoBehaviour
     public Tile GetCurrentTile()
     {
         return currentTile;
+    }
+
+    public EnemyScriptableObject GetEnemyData()
+    {
+        return instanceEnemyData;
     }
 }
