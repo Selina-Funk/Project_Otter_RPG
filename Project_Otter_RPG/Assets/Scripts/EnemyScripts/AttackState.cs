@@ -17,7 +17,8 @@ namespace EnemyAI
             enemyAI.ChoseMove();
             enemyAI.TilesToAttack();
             BattleManager.GetInstance().GetGridManager().ResetEnemyTileWeight();
-            GraphBehavior.ChangeWeights(BattleManager.GetInstance().GetGridManager().FindTileKey(enemyAI.GetCurrentTile().gameObject, false), false, enemyAI.GetEnemyData().weight, enemyAI.GetEnemyData().weightDecreaseValue);
+            enemyAI.GetConnectionGraph().IncreaseEnemyTileWeights(enemyAI.GetCurrentTile(), enemyAI.GetEnemyData().weight, enemyAI.GetEnemyData().weightDecreaseValue);
+            //GraphBehavior.ChangeWeights(BattleManager.GetInstance().GetGridManager().FindTileKey(enemyAI.GetCurrentTile().gameObject, false), false, enemyAI.GetEnemyData().weight, enemyAI.GetEnemyData().weightDecreaseValue);
         }
 
         public void Update()

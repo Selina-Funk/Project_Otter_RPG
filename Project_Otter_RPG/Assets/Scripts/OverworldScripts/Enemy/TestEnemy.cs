@@ -32,7 +32,7 @@ public class TestEnemy : MonoBehaviour
 
     private float elapsedTime = 0.0f;
     private float timeToMove = 3.0f;
-    private float timeToAttack = 5.0f;
+    private float timeToAttack = 2.0f;
 
     [Header("Enemy Attack")]
     private MoveData chosenMove;
@@ -63,7 +63,7 @@ public class TestEnemy : MonoBehaviour
         {
             attackDebug = canAttack;
             SetEnemyState(movementState);
-            StartCoroutine(GoThroughPath(1.0f));
+            StartCoroutine(GoThroughPath(0.6f));
         }
     }
 
@@ -239,5 +239,10 @@ public class TestEnemy : MonoBehaviour
     public EnemyScriptableObject GetEnemyData()
     {
         return instanceEnemyData;
+    }
+
+    public New_Graph GetConnectionGraph()
+    {
+        return connectionGraph;
     }
 }

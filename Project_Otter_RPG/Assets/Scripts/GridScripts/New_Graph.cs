@@ -80,6 +80,70 @@ public class New_Graph : MonoBehaviour
         }
     }
 
+    public void IncreaseEnemyTileWeights(Tile startTile, int startWeight, int changeWeightValue)
+    {
+        Dictionary<Tile, Tile> visited = new Dictionary<Tile, Tile>();
+        visited[startTile] = startTile;
+        Queue<Tile> frontier = new Queue<Tile>();
+        frontier.Enqueue(startTile);
+        int weightValue = startWeight;
+
+        while (frontier.Count > 0)
+        {
+            Tile currentTile = frontier.Dequeue();
+
+            if (!visited.ContainsKey(currentTile) && !currentTile.GetCharacterOn())
+            {
+                currentTile.AddTileWeight(weightValue);
+            }
+
+            var neighbors = enemyAdjacencyList[currentTile];
+
+            foreach (var neighbor in neighbors)
+            {
+                if (visited.ContainsKey(neighbor))
+                {
+                    continue;
+                }
+                else
+                {
+                    frontier.Enqueue(neighbor);
+                    visited[neighbor] = currentTile;
+                }
+            }
+            IncreaseEnemyTileWeightsHelper(startWeight, ref frontier, ref visited, changeWeightValue);
+        }
+    }
+
+    public void IncreaseEnemyTileWeightsHelper(int weight, ref Queue<Tile> oldFrontier, ref Dictionary<Tile, Tile> visited, int weightChangeVal)
+    {
+        weight += weightChangeVal;
+        Queue<Tile> newFrontier = new Queue<Tile>();
+
+        while (oldFrontier.Count > 0)
+        {
+            Tile current = oldFrontier.Dequeue();
+            current.AddTileWeight(weight);
+
+            var neighbors = enemyAdjacencyList[current];
+
+            foreach (var neighbor in neighbors)
+            {
+                if (visited.ContainsKey(neighbor))
+                {
+                    continue;
+                }
+                else
+                {
+                    newFrontier.Enqueue(neighbor);
+                    visited[neighbor] = current;
+                }
+            }
+        }
+
+        if (newFrontier.Count > 0) IncreaseEnemyTileWeightsHelper(weight, ref newFrontier, ref visited, weightChangeVal);
+    }
+
     public List<Tile> GetNeighbors(Tile tile, bool isPlayerGrid)
     {
         if (!isPlayerGrid)
