@@ -114,20 +114,20 @@ public class RadialSelection : MonoBehaviour
             Navigation buttonNav = radialButton.navigation;
             if (i == 0)
             {
-                buttonNav.selectOnLeft = radialMenuParts[(radialMenuParts.Count - 1)].transform.Find("Button").GetComponent<Button>();
+                buttonNav.selectOnRight = radialMenuParts[(radialMenuParts.Count - 1)].transform.Find("Button").GetComponent<Button>();
             }
             else
             {
-                buttonNav.selectOnLeft = radialMenuParts[i-1].transform.Find("Button").GetComponent<Button>();
+                buttonNav.selectOnRight = radialMenuParts[i-1].transform.Find("Button").GetComponent<Button>();
             }
 
             if (i == (radialMenuParts.Count - 1))
             {
-                buttonNav.selectOnRight = radialMenuParts[0].transform.Find("Button").GetComponent<Button>();
+                buttonNav.selectOnLeft = radialMenuParts[0].transform.Find("Button").GetComponent<Button>();
             }
             else
             {
-                buttonNav.selectOnRight = radialMenuParts[i+1].transform.Find("Button").GetComponent<Button>();
+                buttonNav.selectOnLeft = radialMenuParts[i+1].transform.Find("Button").GetComponent<Button>();
             }
             radialButton.navigation = buttonNav;
         }
