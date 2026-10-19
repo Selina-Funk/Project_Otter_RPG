@@ -36,6 +36,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Combat Attack")]
     [SerializeField] List<MoveData> moves = new List<MoveData>();
     private List<GameObject> attackTiles = new List<GameObject>();
+    public bool isAttacking = false;
 
     private List<MoveData> chosenMove = new List<MoveData>();
     private int tileAddition = 0;
@@ -298,7 +299,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void SeeAttackPattern()
     {
-        if (BattleManager.GetInstance().GetPlayerActionTypesList().Count != 0 && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.ATTACK)
+        if (isAttacking)
         {
             if (attackTiles.Count == 0)
             {

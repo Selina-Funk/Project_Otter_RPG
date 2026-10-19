@@ -1,9 +1,10 @@
-using NUnit.Framework;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using NUnit.Framework;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RadialSelection : MonoBehaviour
 {
@@ -25,10 +26,13 @@ public class RadialSelection : MonoBehaviour
     [SerializeField] private Color color4;
     [SerializeField] private Color color4Highlight;
     private List<GameObject> radialMenuParts = new List<GameObject>();
+    private List<MoveData> attackData = new List<MoveData>();
+    private Dictionary<GameObject, MoveData> buttonToAttack = new Dictionary<GameObject, MoveData>();
 
     private void Awake()
     {
         numberOfRadialSlices = playerCombat.GetMoves().Count;
+        attackData = playerCombat.GetMoves();
     }
 
     private void Update()
@@ -102,10 +106,14 @@ public class RadialSelection : MonoBehaviour
                 radialColorBlock.normalColor = color4;
                 radialColorBlock.selectedColor = color4Highlight;
             }
+            buttonToAttack[spawnedRadialPart] = attackData[i];
+            //attackData.RemoveAt(i);
+            spawnedRadialPart.transform.Find("Button").GetComponent<Button>().onClick.AddListener(Attack);
+
             radialButton.colors = radialColorBlock;
             radialMenuParts.Add(spawnedRadialPart);
         }
-        //SetButtonNavigation();
+
         GameObject buttonObj = radialMenuParts[0].transform.Find("Button").gameObject;
         EventSystem.current.SetSelectedGameObject(buttonObj);
 
@@ -154,5 +162,13 @@ public class RadialSelection : MonoBehaviour
             GameObject desiredButton = radialMenuParts[i + 1];
             EventSystem.current.SetSelectedGameObject(desiredButton.transform.Find("Button").gameObject);
         }
+    }
+
+    private void Attack()
+    {
+        GameObject parent = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
+        playerCombat.SetChosenMoveData(buttonToAttack[EventSystem.current.currentSelectedGameObject.transform.parent.gameObject]);
+        playerCombat.isAttacking = true;
+        parent.transform.parent.gameObject.SetActive(false);
     }
 }
