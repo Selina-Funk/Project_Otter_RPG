@@ -3,15 +3,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class RadialSelection : MonoBehaviour
 {
     [Header("Radial button Information")]
-    [SerializeField] private int numberOfRadialSlices = 4;
+    private int numberOfRadialSlices;
     [SerializeField] private GameObject radialPart;
     [SerializeField] private Transform radialMenuCanvas;
     [SerializeField] private float angleBetweenPart = 10.0f;
     [SerializeField] private float rotationAmount;
+    [SerializeField] private PlayerCombat playerCombat;
 
     [Header("Button Colors")]
     [SerializeField] private Color color1;
@@ -24,6 +26,10 @@ public class RadialSelection : MonoBehaviour
     [SerializeField] private Color color4Highlight;
     private List<GameObject> radialMenuParts = new List<GameObject>();
 
+    private void Awake()
+    {
+        numberOfRadialSlices = playerCombat.GetMoves().Count;
+    }
 
     private void Update()
     {
@@ -36,6 +42,7 @@ public class RadialSelection : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            ShiftLeft();
             Vector3 rationalAngle = new Vector3(0, 0, rotationAmount);
             Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
             Vector3 newAngle = currentAngle + rationalAngle;
@@ -45,6 +52,7 @@ public class RadialSelection : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            ShifRight();
             Vector3 rotationalAngle = new Vector3(0, 0, -rotationAmount);
             Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
             Vector3 newAngle = currentAngle + rotationalAngle;
@@ -97,39 +105,54 @@ public class RadialSelection : MonoBehaviour
             radialButton.colors = radialColorBlock;
             radialMenuParts.Add(spawnedRadialPart);
         }
-        SetButtonNavigation();
+        //SetButtonNavigation();
         GameObject buttonObj = radialMenuParts[0].transform.Find("Button").gameObject;
         EventSystem.current.SetSelectedGameObject(buttonObj);
 
         radialMenuCanvas.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -135.0f);
     }
 
-    private void SetButtonNavigation()
+    private void ShiftLeft()
     {
+        GameObject currentButtonObj = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         int i;
-        for (i = 0; i < radialMenuParts.Count; i++)
-        {
-            GameObject buttonObj = radialMenuParts[i].transform.Find("Button").gameObject;
-            Button radialButton = buttonObj.GetComponent<Button>();
-            Navigation buttonNav = radialButton.navigation;
-            if (i == 0)
-            {
-                buttonNav.selectOnRight = radialMenuParts[(radialMenuParts.Count - 1)].transform.Find("Button").GetComponent<Button>();
-            }
-            else
-            {
-                buttonNav.selectOnRight = radialMenuParts[i-1].transform.Find("Button").GetComponent<Button>();
-            }
 
-            if (i == (radialMenuParts.Count - 1))
-            {
-                buttonNav.selectOnLeft = radialMenuParts[0].transform.Find("Button").GetComponent<Button>();
-            }
-            else
-            {
-                buttonNav.selectOnLeft = radialMenuParts[i+1].transform.Find("Button").GetComponent<Button>();
-            }
-            radialButton.navigation = buttonNav;
+        for (i = 0; i < radialMenuParts.Count-1; i++)
+        {
+            if (radialMenuParts[i] == currentButtonObj) break;
+        }
+
+        if (i == 0)
+        {
+            GameObject desiredButton = radialMenuParts[radialMenuParts.Count - 1];
+            EventSystem.current.SetSelectedGameObject(desiredButton.transform.Find("Button").gameObject);
+        }
+        else
+        {
+            GameObject desiredButton = radialMenuParts[i - 1];
+            EventSystem.current.SetSelectedGameObject(desiredButton.transform.Find("Button").gameObject);
+        }
+    }
+
+    private void ShifRight()
+    {
+        GameObject currentButtonObj = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
+        int i;
+
+        for (i = 0; i < radialMenuParts.Count - 1; i++)
+        {
+            if (radialMenuParts[i] == currentButtonObj) break;
+        }
+
+        if (i == radialMenuParts.Count - 1)
+        {
+            GameObject desiredButton = radialMenuParts[0];
+            EventSystem.current.SetSelectedGameObject(desiredButton.transform.Find("Button").gameObject);
+        }
+        else
+        {
+            GameObject desiredButton = radialMenuParts[i + 1];
+            EventSystem.current.SetSelectedGameObject(desiredButton.transform.Find("Button").gameObject);
         }
     }
 }

@@ -362,6 +362,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1037327621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180107754060161903, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+  m_PrefabInstance: {fileID: 5958932113350687664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cba5f54c4bdfba4a9f2b89285681457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
 --- !u!1 &2117156562
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,6 +544,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3083671008759563234, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7559180084161752487, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: color1.a
       value: 1
@@ -597,6 +612,10 @@ PrefabInstance:
       propertyPath: color4.r
       value: 0.5622641
       objectReference: {fileID: 0}
+    - target: {fileID: 7559180084161752487, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: playerCombat
+      value: 
+      objectReference: {fileID: 1037327621}
     - target: {fileID: 7559180084161752487, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: color1Highlight.a
       value: 1
