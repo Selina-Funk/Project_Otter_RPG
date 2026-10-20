@@ -90,6 +90,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        healthBar.SetHealth(characterData.characterCurrentHealth);
         VisualizeMovement();
         SeeAttackPattern();
         Death();

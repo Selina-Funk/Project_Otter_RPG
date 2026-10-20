@@ -177,11 +177,12 @@ public class TestEnemy : MonoBehaviour
 
     public void Attack()
     {
-        foreach (var tile in gridManager.GetPlayerTileDictionary().Values)
+        foreach (var tile in chosenMove.tileKeys)
         {
-            if (tile.GetComponent<Tile>().GetCharacterOn())
+            GameObject tileObj = gridManager.GetPlayerTileDictionary()[tile + tileAttackAddition].gameObject;
+            if (tileObj.GetComponent<Tile>().GetCharacterOn())
             {
-                tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<PlayerCombat>().TakeDamage(chosenMove.attackDamage);
+                tileObj.GetComponent<Tile>().GetCharacterOnTile().GetComponent<PlayerCombat>().TakeDamage(chosenMove.attackDamage);
             }
         }
         

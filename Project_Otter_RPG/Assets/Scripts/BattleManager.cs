@@ -64,9 +64,6 @@ public class BattleManager : MonoBehaviour
     {
         CreateInstance();
 
-        GameObject attackCanvas = GameObject.FindAnyObjectByType<ButtonManager>(FindObjectsInactive.Include).gameObject;
-        attackCanvas.SetActive(true);
-
         // Gets the Player Actions for clicking
         playerActions = new PlayerActions();
         playerActions.Combat.ConfirmAction.performed += PerformAction;

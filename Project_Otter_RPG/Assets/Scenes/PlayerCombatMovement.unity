@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &262453557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8553324344345565643, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
-  m_PrefabInstance: {fileID: 5958932113350687664}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 262453557}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &2117156565
@@ -471,6 +466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 975424773526628274, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1578054135635219479, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -551,10 +550,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1975890263395149496, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2180107754060161903, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: radialSelection
       value: 
       objectReference: {fileID: 717353526}
+    - target: {fileID: 2545277495436903385, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Camera
       value: 
@@ -562,6 +569,18 @@ PrefabInstance:
     - target: {fileID: 3083671008759563234, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242049872839808448, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591959041739761901, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189739816637514953, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7559180084161752487, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: color1.a
@@ -699,8 +718,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Attack_Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8524198314790684797, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3083671008759563234, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+    - {fileID: 5022343343871024507, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
