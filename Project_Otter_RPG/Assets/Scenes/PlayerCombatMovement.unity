@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 5073077942122808807, guid: 21fc40e731f69384a9bafafac545825c, type: 3}
     - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
       propertyPath: enemyRange.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6323471128766170437, guid: 67e7717343788d542afd51ecb7448ede, type: 3}
       propertyPath: enemyRange.y
