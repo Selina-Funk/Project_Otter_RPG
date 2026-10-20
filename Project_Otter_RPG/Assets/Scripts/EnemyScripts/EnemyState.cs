@@ -4,7 +4,7 @@ namespace EnemyAI
 {
     public interface IEnemyState
     {
-        void Enter(TestEnemy enemy);
+        void Enter(EnemyBase enemy);
         void Update();
         void Exit();
     }

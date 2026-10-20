@@ -91,4 +91,3 @@ MonoBehaviour:
   baseEnemyData: {fileID: 11400000, guid: 672e70c3750fa3b43bd4bb85cfa9b281, type: 2}
   canAttack: 0
   attackDebug: 0
-  moves: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5089971612649489989}
   - component: {fileID: 4566462005148895310}
   - component: {fileID: 4501982074539802876}
-  - component: {fileID: 7467620107624681966}
+  - component: {fileID: 2064061524940024321}
   m_Layer: 5
   m_Name: Enemy_UI
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7467620107624681966
+--- !u!114 &2064061524940024321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,9 +85,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5073077942122808807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cc72d42a60686849aa33306041da22b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1923c3832ab90d049923092942041750, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  m_EditorClassIdentifier: Assembly-CSharp::TestEnemy
   baseEnemyData: {fileID: 11400000, guid: 672e70c3750fa3b43bd4bb85cfa9b281, type: 2}
-  moves:
-  - {fileID: 11400000, guid: 6c8fc9d1595f3aa4e8d3bfc5bc763469, type: 2}
+  canAttack: 0
+  attackDebug: 0

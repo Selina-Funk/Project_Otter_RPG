@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private int playerCombatActions = 2;
     private PlayerCombat playerCombat;
-    [SerializeField] private List<TestEnemy> enemyList;
+    [SerializeField] private List<EnemyBase> enemyList;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject enemyPrefab;
 
@@ -72,7 +72,7 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-        enemyList = new List<TestEnemy>();
+        enemyList = new List<EnemyBase>();
         playerCombat = GameObject.FindAnyObjectByType<PlayerCombat>(FindObjectsInactive.Include);
         playerCombat.SetPlayerActionCount(playerCombatActions);
         List<GameObject> enemyObjects = new List<GameObject>();
@@ -80,7 +80,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < numOfEnemies; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, new Vector2(0, 0), Quaternion.identity, GameObject.Find("Attack_Canvas").gameObject.transform);
-            enemyList.Add(enemy.GetComponent<TestEnemy>());
+            enemyList.Add(enemy.GetComponent<EnemyBase>());
         }
     }
 
@@ -227,7 +227,7 @@ public class BattleManager : MonoBehaviour
         return playerActionsTypes;
     }
 
-    public List<TestEnemy> GetEnemyList()
+    public List<EnemyBase> GetEnemyList()
     {
         return enemyList;
     }

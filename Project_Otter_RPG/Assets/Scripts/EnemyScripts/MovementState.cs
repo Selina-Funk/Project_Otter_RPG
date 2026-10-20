@@ -5,9 +5,9 @@ namespace EnemyAI
 {
     public class MovementState : IEnemyState
     {
-        private TestEnemy enemyAI;
+        private EnemyBase enemyAI;
 
-        public void Enter(TestEnemy enemy)
+        public void Enter(EnemyBase enemy)
         {
             Debug.Log("ENEMY IS IN MOVE STATE");
             enemyAI = enemy;

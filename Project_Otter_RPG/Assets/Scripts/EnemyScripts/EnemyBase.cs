@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class TestEnemy : MonoBehaviour
+public class EnemyBase : MonoBehaviour
 {
     [Header("Base Enemy")]
     [SerializeField] EnemyScriptableObject baseEnemyData;
@@ -33,6 +33,7 @@ public class TestEnemy : MonoBehaviour
     private float elapsedTime = 0.0f;
     private float timeToMove = 3.0f;
     private float timeToAttack = 2.0f;
+    private float attackTimeElapsed = 0.0f;
 
     [Header("Enemy Attack")]
     private MoveData chosenMove;
@@ -63,7 +64,8 @@ public class TestEnemy : MonoBehaviour
         {
             attackDebug = canAttack;
             SetEnemyState(movementState);
-            StartCoroutine(GoThroughPath(0.6f));
+            float movementTime = Random.Range(instanceEnemyData.movementTimes.x, instanceEnemyData.movementTimes.y);
+            StartCoroutine(GoThroughPath(movementTime));
         }
     }
 
@@ -87,7 +89,8 @@ public class TestEnemy : MonoBehaviour
         currentTile = startSpawn.GetComponent<Tile>();
         currentTile.SetCharacterOn(true);
         GraphBehavior.ChangeWeights(gridManager.FindTileKey(startSpawn, false), false, instanceEnemyData.weight, instanceEnemyData.weightDecreaseValue);
-        StartCoroutine(GoThroughPath(1.0f));
+        float movementTime = Random.Range(instanceEnemyData.movementTimes.x, instanceEnemyData.movementTimes.y);
+        StartCoroutine(GoThroughPath(movementTime));
         }
 
     public IEnumerator GoThroughPath(float duration)
@@ -105,7 +108,8 @@ public class TestEnemy : MonoBehaviour
                 currentTile.SetCharacterOn(true);
                 currentTile.SetCharacterOnTile(this.gameObject);
                 this.gameObject.transform.position = currentTile.gameObject.transform.position;
-                StartCoroutine(GoThroughPath(duration));
+                float movementTime = Random.Range(instanceEnemyData.movementTimes.x, instanceEnemyData.movementTimes.y);
+                StartCoroutine(GoThroughPath(movementTime));
             }
             else
             {
@@ -118,7 +122,7 @@ public class TestEnemy : MonoBehaviour
         }
     }
 
-    private Tile getEndTile()
+    protected virtual Tile getEndTile()
     {
         Tile endTile = null;
         foreach (var gameObject in gridManager.GetEnemyTileDictionary().Values)
@@ -143,7 +147,7 @@ public class TestEnemy : MonoBehaviour
         chosenMove = instanceEnemyData.moveList[randomAttack];
     }
 
-    public void TilesToAttack()
+    public virtual void TilesToAttack()
     {
         int tempWeight = 0;
         int totalWeight = 0;
@@ -169,10 +173,12 @@ public class TestEnemy : MonoBehaviour
 
     public void VisualizeAttack()
     {
+        float timeVal = attackTimeElapsed / timeToAttack;
         foreach (int tileKey in chosenMove.tileKeys)
         {
-            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.pink;
+            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.Lerp(Color.darkRed, Color.red, attackTimeElapsed);
         }
+        attackTimeElapsed += Time.deltaTime;
     }
 
     public void Attack()
@@ -232,6 +238,16 @@ public class TestEnemy : MonoBehaviour
     public float GetElapsedTime()
     {
         return elapsedTime;
+    }
+
+    public void SetAttackElapsed(float value)
+    {
+        attackTimeElapsed = value;
+    }
+
+    public float GetAttackElapsed()
+    {
+        return attackTimeElapsed;
     }
 
     public Tile GetCurrentTile()

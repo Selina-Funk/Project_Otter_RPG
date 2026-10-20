@@ -353,7 +353,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (tile.GetComponent<Tile>().GetCharacterOn())
                 {
-                    tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<TestEnemy>().GetEnemyData().enemyCurrentHealth -= chosenMove.FirstOrDefault().attackDamage;
+                    tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<EnemyBase>().GetEnemyData().enemyCurrentHealth -= chosenMove.FirstOrDefault().attackDamage;
                     attackTiles = new List<GameObject>();
                 }
             }

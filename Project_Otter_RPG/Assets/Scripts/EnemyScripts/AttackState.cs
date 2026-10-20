@@ -5,9 +5,9 @@ namespace EnemyAI
 {
     public class AttackState : IEnemyState
     {
-        private TestEnemy enemyAI;
+        private EnemyBase enemyAI;
 
-        public void Enter(TestEnemy enemy)
+        public void Enter(EnemyBase enemy)
         {
             Debug.Log("ENEMY IS IN ATTACK STATE");
             enemyAI = enemy;
@@ -18,7 +18,6 @@ namespace EnemyAI
             enemyAI.TilesToAttack();
             BattleManager.GetInstance().GetGridManager().ResetEnemyTileWeight();
             enemyAI.GetConnectionGraph().IncreaseEnemyTileWeights(enemyAI.GetCurrentTile(), enemyAI.GetEnemyData().weight, enemyAI.GetEnemyData().weightDecreaseValue);
-            //GraphBehavior.ChangeWeights(BattleManager.GetInstance().GetGridManager().FindTileKey(enemyAI.GetCurrentTile().gameObject, false), false, enemyAI.GetEnemyData().weight, enemyAI.GetEnemyData().weightDecreaseValue);
         }
 
         public void Update()
@@ -39,8 +38,8 @@ namespace EnemyAI
         {
             enemyAI.Attack();
             enemyAI.UnvisualizeAttack();
-            //BattleManager.GetInstance().GetGridManager().ResetEnemyTileWeight();
             Debug.Log("ENEMY IS EXITING IN ATTACK STATE");
+            enemyAI.SetAttackElapsed(0.0f);
             enemyAI.SetElapsedTime(0.0f);
         }
     }

@@ -14,9 +14,9 @@ public class New_Graph : MonoBehaviour
     private PriorityQueue<Tile> frontier;
 
     private GridManager gridManager;
-    private TestEnemy enemy;
+    private EnemyBase enemy;
 
-    public void ConnectEnemyTiles(TestEnemy theEnemy)
+    public void ConnectEnemyTiles(EnemyBase theEnemy)
     {
         enemy = theEnemy;
         gridManager = BattleManager.GetInstance().GetGridManager();
@@ -48,7 +48,7 @@ public class New_Graph : MonoBehaviour
         }
     }
 
-    public void ConnectPlayerTiles(TestEnemy theEnemy)
+    public void ConnectPlayerTiles(EnemyBase theEnemy)
     {
         enemy = theEnemy;
         gridManager = BattleManager.GetInstance().GetGridManager();
