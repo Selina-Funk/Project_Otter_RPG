@@ -25,6 +25,8 @@ public class EnemyBase : MonoBehaviour
     private IEnemyState currentState;
     private MovementState movementState;
     private AttackState attackState;
+
+    public float enemyHealth;
     
     private bool canMove = false;
     public bool canAttack = false;
@@ -43,6 +45,7 @@ public class EnemyBase : MonoBehaviour
     private void Awake()
     {
         instanceEnemyData = baseEnemyData;
+        instanceEnemyData.enemyCurrentHealth = instanceEnemyData.enemyMaxHealth;
 
         gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();
         movementState = new MovementState();
@@ -59,6 +62,8 @@ public class EnemyBase : MonoBehaviour
 
     private void Update()
     {
+        enemyHealth = instanceEnemyData.enemyCurrentHealth;
+
         currentState.Update();
         if (!canAttack && attackDebug)
         {
@@ -200,6 +205,14 @@ public class EnemyBase : MonoBehaviour
         foreach (int tileKey in chosenMove.tileKeys)
         {
             gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.green;
+        }
+    }
+
+    public void Death()
+    {
+        if (instanceEnemyData.enemyCurrentHealth <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 

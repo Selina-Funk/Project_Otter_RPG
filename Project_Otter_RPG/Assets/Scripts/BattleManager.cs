@@ -99,9 +99,9 @@ public class BattleManager : MonoBehaviour
             {
                 foreach (var enemy in enemyList)
                 {
-                    //enemy.Death();
+                    enemy.Death();
                 }
-                //enemyList.RemoveAll(enemy => enemy.GetEnemyScriptableObject().enemyCurrentHealth <= 0);
+                enemyList.RemoveAll(enemy => enemy.GetEnemyData().enemyCurrentHealth <= 0);
                 ResetEnemyGrid();
                 if (enemyList.Count <= 0)
                 {
