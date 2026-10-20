@@ -92,15 +92,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AddTileMovement",
-                    "type": "Button",
-                    "id": "2f2d8343-7706-4bad-8687-2b3fc53bebfc",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AddTileMovementUp",
                     "type": "Button",
                     "id": "8a69bb0b-3582-4c7c-91d6-486e537b41c2",
@@ -140,6 +131,24 @@
                     "name": "ConfirmAction",
                     "type": "Button",
                     "id": "0b106a81-3d6a-46d1-b172-d4babd4fbb01",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateRight",
+                    "type": "Button",
+                    "id": "7fb07fd9-0f56-4d06-844e-65ea9ae42a6d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateLeft",
+                    "type": "Button",
+                    "id": "a1fc0b34-8cbf-4dff-937e-da6e3b72ce41",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -188,50 +197,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "AddTileAtk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f5dec9ea-91c7-4607-b13e-b201d74a358f",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AddTileMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8874550b-f905-494d-91e0-d26665083f30",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AddTileMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a5b3a706-4e84-494e-91e1-1f993e54dd5e",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AddTileMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2d4423ba-4ef1-44c7-ba4d-43bca65ea655",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AddTileMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -287,6 +252,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "ConfirmAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60bf1b69-7ea3-444d-a1c6-6683d47804bd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "330b6e2a-2f68-4144-9d14-0193dab5200d",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bd83f2c-522e-4446-95ba-6cb4e28fd74a",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -362,6 +362,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717353526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7559180084161752487, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+  m_PrefabInstance: {fileID: 5958932113350687664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073fb016a55545a4ab26fc53a84b12f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RadialSelection
 --- !u!114 &1037327621 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2180107754060161903, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
@@ -540,6 +551,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2180107754060161903, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
+      propertyPath: radialSelection
+      value: 
+      objectReference: {fileID: 717353526}
     - target: {fileID: 2808742390275200391, guid: 42a0164a2e7f5a24aa16acd54213d009, type: 3}
       propertyPath: m_Camera
       value: 

@@ -178,15 +178,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AddTileMovement"",
-                    ""type"": ""Button"",
-                    ""id"": ""2f2d8343-7706-4bad-8687-2b3fc53bebfc"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AddTileMovementUp"",
                     ""type"": ""Button"",
                     ""id"": ""8a69bb0b-3582-4c7c-91d6-486e537b41c2"",
@@ -226,6 +217,24 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""ConfirmAction"",
                     ""type"": ""Button"",
                     ""id"": ""0b106a81-3d6a-46d1-b172-d4babd4fbb01"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fb07fd9-0f56-4d06-844e-65ea9ae42a6d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1fc0b34-8cbf-4dff-937e-da6e3b72ce41"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -274,50 +283,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AddTileAtk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f5dec9ea-91c7-4607-b13e-b201d74a358f"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AddTileMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8874550b-f905-494d-91e0-d26665083f30"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AddTileMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a5b3a706-4e84-494e-91e1-1f993e54dd5e"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AddTileMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2d4423ba-4ef1-44c7-ba4d-43bca65ea655"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AddTileMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -373,6 +338,39 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ConfirmAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60bf1b69-7ea3-444d-a1c6-6683d47804bd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""330b6e2a-2f68-4144-9d14-0193dab5200d"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bd83f2c-522e-4446-95ba-6cb4e28fd74a"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -822,12 +820,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // Combat
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_AddTileAtk = m_Combat.FindAction("AddTileAtk", throwIfNotFound: true);
-        m_Combat_AddTileMovement = m_Combat.FindAction("AddTileMovement", throwIfNotFound: true);
         m_Combat_AddTileMovementUp = m_Combat.FindAction("AddTileMovementUp", throwIfNotFound: true);
         m_Combat_AddTileMovementDown = m_Combat.FindAction("AddTileMovementDown", throwIfNotFound: true);
         m_Combat_AddTileMovementRight = m_Combat.FindAction("AddTileMovementRight", throwIfNotFound: true);
         m_Combat_AddTileMovementLeft = m_Combat.FindAction("AddTileMovementLeft", throwIfNotFound: true);
         m_Combat_ConfirmAction = m_Combat.FindAction("ConfirmAction", throwIfNotFound: true);
+        m_Combat_RotateRight = m_Combat.FindAction("RotateRight", throwIfNotFound: true);
+        m_Combat_RotateLeft = m_Combat.FindAction("RotateLeft", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1127,12 +1126,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Combat;
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
     private readonly InputAction m_Combat_AddTileAtk;
-    private readonly InputAction m_Combat_AddTileMovement;
     private readonly InputAction m_Combat_AddTileMovementUp;
     private readonly InputAction m_Combat_AddTileMovementDown;
     private readonly InputAction m_Combat_AddTileMovementRight;
     private readonly InputAction m_Combat_AddTileMovementLeft;
     private readonly InputAction m_Combat_ConfirmAction;
+    private readonly InputAction m_Combat_RotateRight;
+    private readonly InputAction m_Combat_RotateLeft;
     /// <summary>
     /// Provides access to input actions defined in input action map "Combat".
     /// </summary>
@@ -1148,10 +1148,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Combat/AddTileAtk".
         /// </summary>
         public InputAction @AddTileAtk => m_Wrapper.m_Combat_AddTileAtk;
-        /// <summary>
-        /// Provides access to the underlying input action "Combat/AddTileMovement".
-        /// </summary>
-        public InputAction @AddTileMovement => m_Wrapper.m_Combat_AddTileMovement;
         /// <summary>
         /// Provides access to the underlying input action "Combat/AddTileMovementUp".
         /// </summary>
@@ -1172,6 +1168,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Combat/ConfirmAction".
         /// </summary>
         public InputAction @ConfirmAction => m_Wrapper.m_Combat_ConfirmAction;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/RotateRight".
+        /// </summary>
+        public InputAction @RotateRight => m_Wrapper.m_Combat_RotateRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Combat/RotateLeft".
+        /// </summary>
+        public InputAction @RotateLeft => m_Wrapper.m_Combat_RotateLeft;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1201,9 +1205,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @AddTileAtk.started += instance.OnAddTileAtk;
             @AddTileAtk.performed += instance.OnAddTileAtk;
             @AddTileAtk.canceled += instance.OnAddTileAtk;
-            @AddTileMovement.started += instance.OnAddTileMovement;
-            @AddTileMovement.performed += instance.OnAddTileMovement;
-            @AddTileMovement.canceled += instance.OnAddTileMovement;
             @AddTileMovementUp.started += instance.OnAddTileMovementUp;
             @AddTileMovementUp.performed += instance.OnAddTileMovementUp;
             @AddTileMovementUp.canceled += instance.OnAddTileMovementUp;
@@ -1219,6 +1220,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @ConfirmAction.started += instance.OnConfirmAction;
             @ConfirmAction.performed += instance.OnConfirmAction;
             @ConfirmAction.canceled += instance.OnConfirmAction;
+            @RotateRight.started += instance.OnRotateRight;
+            @RotateRight.performed += instance.OnRotateRight;
+            @RotateRight.canceled += instance.OnRotateRight;
+            @RotateLeft.started += instance.OnRotateLeft;
+            @RotateLeft.performed += instance.OnRotateLeft;
+            @RotateLeft.canceled += instance.OnRotateLeft;
         }
 
         /// <summary>
@@ -1233,9 +1240,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @AddTileAtk.started -= instance.OnAddTileAtk;
             @AddTileAtk.performed -= instance.OnAddTileAtk;
             @AddTileAtk.canceled -= instance.OnAddTileAtk;
-            @AddTileMovement.started -= instance.OnAddTileMovement;
-            @AddTileMovement.performed -= instance.OnAddTileMovement;
-            @AddTileMovement.canceled -= instance.OnAddTileMovement;
             @AddTileMovementUp.started -= instance.OnAddTileMovementUp;
             @AddTileMovementUp.performed -= instance.OnAddTileMovementUp;
             @AddTileMovementUp.canceled -= instance.OnAddTileMovementUp;
@@ -1251,6 +1255,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @ConfirmAction.started -= instance.OnConfirmAction;
             @ConfirmAction.performed -= instance.OnConfirmAction;
             @ConfirmAction.canceled -= instance.OnConfirmAction;
+            @RotateRight.started -= instance.OnRotateRight;
+            @RotateRight.performed -= instance.OnRotateRight;
+            @RotateRight.canceled -= instance.OnRotateRight;
+            @RotateLeft.started -= instance.OnRotateLeft;
+            @RotateLeft.performed -= instance.OnRotateLeft;
+            @RotateLeft.canceled -= instance.OnRotateLeft;
         }
 
         /// <summary>
@@ -1583,13 +1593,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAddTileAtk(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "AddTileMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAddTileMovement(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "AddTileMovementUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1624,6 +1627,20 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnConfirmAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateLeft(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

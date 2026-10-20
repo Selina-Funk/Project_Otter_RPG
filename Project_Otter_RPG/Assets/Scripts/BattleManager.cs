@@ -95,33 +95,22 @@ public class BattleManager : MonoBehaviour
     // Performs actions based on the player's action list
     private void PerformAction(InputAction.CallbackContext ctx)
     {
-        // Checks to make sure list is not empty
-        if (canPerformActions && playersTurn)
+
+        if (playerCombat.isAttacking)
         {
-            // What to do with the movement action
-            if (playerActionsTypes[0] == ActionTypes.MOVE)
+            if (playerCombat.Attack())
             {
-                playerCombat.MovePlayer();
-            }
-            // What to do with the attack action
-            else if (playerActionsTypes[0] == ActionTypes.ATTACK)
-            {
-                if (playerCombat.Attack())
+                foreach (var enemy in enemyList)
                 {
-                    foreach (var enemy in enemyList)
-                    {
-                        //enemy.Death();
-                    }
-                    //enemyList.RemoveAll(enemy => enemy.GetEnemyScriptableObject().enemyCurrentHealth <= 0);
-                    ResetEnemyGrid();
-                    playerActionsTypes.RemoveAt(0);
-                    if (enemyList.Count <= 0)
-                    {
-                        SceneManager.LoadScene("EndScene");
-                    }
+                    //enemy.Death();
+                }
+                //enemyList.RemoveAll(enemy => enemy.GetEnemyScriptableObject().enemyCurrentHealth <= 0);
+                ResetEnemyGrid();
+                if (enemyList.Count <= 0)
+                {
+                    SceneManager.LoadScene("EndScene");
                 }
             }
-            playerCombat.SetPlayerActionCount(-1);
         }
     }
 

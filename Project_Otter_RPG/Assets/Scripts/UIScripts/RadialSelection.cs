@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RadialSelection : MonoBehaviour
@@ -15,6 +17,7 @@ public class RadialSelection : MonoBehaviour
     [SerializeField] private float angleBetweenPart = 10.0f;
     [SerializeField] private float rotationAmount;
     [SerializeField] private PlayerCombat playerCombat;
+    GameObject entireRadialMenu;
 
     [Header("Button Colors")]
     [SerializeField] private Color color1;
@@ -29,8 +32,13 @@ public class RadialSelection : MonoBehaviour
     private List<MoveData> attackData = new List<MoveData>();
     private Dictionary<GameObject, MoveData> buttonToAttack = new Dictionary<GameObject, MoveData>();
 
+    private PlayerActions playerActions;
+
     private void Awake()
     {
+        playerActions = new PlayerActions();
+        playerActions.Combat.RotateRight.performed += RotateWheelRight;
+        playerActions.Combat.RotateLeft.performed += RotateWheelLeft;
         numberOfRadialSlices = playerCombat.GetMoves().Count;
         attackData = playerCombat.GetMoves();
     }
@@ -43,27 +51,6 @@ public class RadialSelection : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(attackCanvas.transform as RectTransform, screenPos, attackCanvas.worldCamera, out Vector2 localPoint);
 
         radialMenuCanvas.GetComponent<Transform>().position = GameObject.Find("Player_UI").transform.position;
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ShiftLeft();
-            Vector3 rationalAngle = new Vector3(0, 0, rotationAmount);
-            Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
-            Vector3 newAngle = currentAngle + rationalAngle;
-            if (newAngle.z > 360) newAngle.z -= 360;
-
-            radialMenuCanvas.transform.localEulerAngles = newAngle;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            ShifRight();
-            Vector3 rotationalAngle = new Vector3(0, 0, -rotationAmount);
-            Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
-            Vector3 newAngle = currentAngle + rotationalAngle;
-            if (newAngle.z < 0) newAngle.z += 360;
-
-            radialMenuCanvas.transform.localEulerAngles = newAngle;
-        }
     }
     public void SpawnRaidialPart()
     {
@@ -120,6 +107,26 @@ public class RadialSelection : MonoBehaviour
         radialMenuCanvas.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -135.0f);
     }
 
+    private void RotateWheelLeft(InputAction.CallbackContext context)
+    {
+        ShiftLeft();
+        Vector3 rationalAngle = new Vector3(0, 0, rotationAmount);
+        Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
+        Vector3 newAngle = currentAngle + rationalAngle;
+        if (newAngle.z > 360) newAngle.z -= 360;
+        radialMenuCanvas.transform.localEulerAngles = newAngle;
+    }
+
+    private void RotateWheelRight(InputAction.CallbackContext context)
+    {
+        ShiftRight();
+        Vector3 rotationalAngle = new Vector3(0, 0, -rotationAmount);
+        Vector3 currentAngle = radialMenuCanvas.transform.localEulerAngles;
+        Vector3 newAngle = currentAngle + rotationalAngle;
+        if (newAngle.z < 0) newAngle.z += 360;
+        radialMenuCanvas.transform.localEulerAngles = newAngle;
+    }
+
     private void ShiftLeft()
     {
         GameObject currentButtonObj = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
@@ -142,7 +149,7 @@ public class RadialSelection : MonoBehaviour
         }
     }
 
-    private void ShifRight()
+    private void ShiftRight()
     {
         GameObject currentButtonObj = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         int i;
@@ -166,9 +173,55 @@ public class RadialSelection : MonoBehaviour
 
     private void Attack()
     {
-        GameObject parent = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
+        entireRadialMenu = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         playerCombat.SetChosenMoveData(buttonToAttack[EventSystem.current.currentSelectedGameObject.transform.parent.gameObject]);
         playerCombat.isAttacking = true;
-        parent.transform.parent.gameObject.SetActive(false);
+        DisableRotation();
+        entireRadialMenu.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void BringBackMenu()
+    {
+        EnableRotation();
+        GameObject parentTest = entireRadialMenu.transform.parent.gameObject;
+        parentTest.SetActive(true);
+    }
+
+    public void DisableRotation()
+    {
+        playerActions.Combat.RotateRight.Disable();
+        playerActions.Combat.RotateLeft.Disable();
+        foreach (var button in radialMenuParts)
+        {
+            button.transform.GetChild(0).GetComponent<Button>().onClick.RemoveAllListeners();
+        }
+    }
+
+    public void EnableRotation()
+    {
+        playerActions.Combat.RotateRight.Enable();
+        playerActions.Combat.RotateLeft.Enable();
+
+        StartCoroutine(ReenableButtonListeners(0.5f));
+    }
+
+    private IEnumerator ReenableButtonListeners(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        foreach (var button in radialMenuParts)
+        {
+            button.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(Attack);
+        }
+    }
+
+    private void OnEnable()
+    {
+        playerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        //playerActions.Disable();
     }
 }

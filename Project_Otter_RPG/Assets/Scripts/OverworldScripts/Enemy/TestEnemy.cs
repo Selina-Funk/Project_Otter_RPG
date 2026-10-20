@@ -100,8 +100,10 @@ public class TestEnemy : MonoBehaviour
             if (path.Count > 0)
             {
                 currentTile.SetCharacterOn(false);
+                currentTile.SetCharacterOnTile(null);
                 currentTile = path.LastOrDefault();
                 currentTile.SetCharacterOn(true);
+                currentTile.SetCharacterOnTile(this.gameObject);
                 this.gameObject.transform.position = currentTile.gameObject.transform.position;
                 StartCoroutine(GoThroughPath(duration));
             }

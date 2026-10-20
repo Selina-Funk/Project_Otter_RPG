@@ -35,6 +35,7 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Combat Attack")]
     [SerializeField] List<MoveData> moves = new List<MoveData>();
+    [SerializeField] RadialSelection radialSelection;
     private List<GameObject> attackTiles = new List<GameObject>();
     public bool isAttacking = false;
 
@@ -275,7 +276,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void ChangeTileValue(InputAction.CallbackContext context)
     {
-        if (BattleManager.GetInstance().GetCanPerformActions() && BattleManager.GetInstance().GetPlayerActionTypesList()[0] == BattleManager.ActionTypes.ATTACK && chosenMove.Count != 0)
+        if (isAttacking)
         {
             MoveData atk = chosenMove[0];
             if (context.control.name == PlayerCombat.InputKeyNames.upArrow.ToString() && (atk.rightMostTileKey + tileAddition) % 4 != 0)
@@ -351,12 +352,14 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (tile.GetComponent<Tile>().GetCharacterOn())
                 {
-                    tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<Enemy>().GetEnemyScriptableObject().enemyCurrentHealth -= chosenMove.FirstOrDefault().attackDamage;
+                    tile.GetComponent<Tile>().GetCharacterOnTile().GetComponent<TestEnemy>().GetEnemyData().enemyCurrentHealth -= chosenMove.FirstOrDefault().attackDamage;
                     attackTiles = new List<GameObject>();
                 }
             }
             chosenMove.RemoveAt(chosenMove.IndexOf(chosenMove.FirstOrDefault()));
+            isAttacking = false;
             tileAddition = 0;
+            radialSelection.BringBackMenu();
             return true;
         }
 
