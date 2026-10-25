@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
     [SerializeField] Color enemyColor;
     [SerializeField] Color playerColor;
     [SerializeField] private bool characterOn = false;
+    private bool isBeingAttacked = false;
     private GameObject characterOnTile;
     Image image;
 
@@ -65,5 +66,15 @@ public class Tile : MonoBehaviour
     public void SetPosition(Vector2Int pos)
     {
         position = pos;
+    }
+
+    public void SetBeingAttacked(bool truthValue)
+    {
+        isBeingAttacked = truthValue;
+    }
+
+    public bool GetBeingAttacked()
+    {
+        return isBeingAttacked;
     }
 }

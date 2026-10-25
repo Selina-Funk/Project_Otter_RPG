@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4566462005148895310}
   - component: {fileID: 4501982074539802876}
   - component: {fileID: 2064061524940024321}
+  - component: {fileID: 3740429825426165896}
   m_Layer: 5
   m_Name: Enemy_UI
   m_TagString: Untagged
@@ -83,11 +84,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5073077942122808807}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1923c3832ab90d049923092942041750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestEnemy
   baseEnemyData: {fileID: 11400000, guid: 672e70c3750fa3b43bd4bb85cfa9b281, type: 2}
+  enemyHealth: 0
+  canAttack: 0
+  attackDebug: 0
+--- !u!114 &3740429825426165896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073077942122808807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ed1ce233f0f044c8c88b457835a5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyChildTest
+  baseEnemyData: {fileID: 11400000, guid: 672e70c3750fa3b43bd4bb85cfa9b281, type: 2}
+  enemyHealth: 0
   canAttack: 0
   attackDebug: 0

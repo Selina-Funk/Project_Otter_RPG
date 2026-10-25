@@ -19,26 +19,26 @@ public class New_Graph : MonoBehaviour
     public void ConnectEnemyTiles(EnemyBase theEnemy)
     {
         enemy = theEnemy;
-        gridManager = BattleManager.GetInstance().GetGridManager();
-        foreach (var obj in gridManager.GetEnemyTileDictionary())
+        //gridManager = BattleManager.GetInstance().GetGridManager();
+        foreach (var obj in enemy.GetEnemyTileDic())
         {
             List<Tile> neighbors = new List<Tile>();
 
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key - 4))
+            if (enemy.GetEnemyTileDic().ContainsKey(obj.Key - 4))
             {
-                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key - 4].GetComponent<Tile>());
+                neighbors.Add(enemy.GetEnemyTileDic()[obj.Key - 4].GetComponent<Tile>());
             }
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key - 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 0)
+            if (enemy.GetEnemyTileDic().ContainsKey(obj.Key - 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 0)
             {
-                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key - 1].GetComponent<Tile>());
+                neighbors.Add(enemy.GetEnemyTileDic()[obj.Key - 1].GetComponent<Tile>());
             }
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key + 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 3)
+            if (enemy.GetEnemyTileDic().ContainsKey(obj.Key + 1) && obj.Value.GetComponent<Tile>().GetPosition().y != 3)
             {
-                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key + 1].GetComponent<Tile>());
+                neighbors.Add(enemy.GetEnemyTileDic()[obj.Key + 1].GetComponent<Tile>());
             }
-            if (gridManager.GetEnemyTileDictionary().ContainsKey(obj.Key + 4))
+            if (enemy.GetEnemyTileDic().ContainsKey(obj.Key + 4))
             {
-                neighbors.Add(gridManager.GetEnemyTileDictionary()[obj.Key + 4].GetComponent<Tile>());
+                neighbors.Add(enemy.GetEnemyTileDic()[obj.Key + 4].GetComponent<Tile>());
             }
 
             if (!enemyAdjacencyList.ContainsKey(obj.Value.GetComponent<Tile>()))

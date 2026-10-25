@@ -15,6 +15,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] EnemyScriptableObject baseEnemyData;
     private EnemyScriptableObject instanceEnemyData;
     private GridManager gridManager;
+    private Dictionary<int, GameObject> enemyTileDictionary = new Dictionary<int, GameObject>();
 
     [Header("Navigation Path")]
     private New_Graph connectionGraph = new New_Graph();
@@ -55,6 +56,7 @@ public class EnemyBase : MonoBehaviour
 
     private void Start()
     {
+        enemyTileDictionary = gridManager.GetEnemyTileDictionary();
         connectionGraph.ConnectEnemyTiles(this);
         connectionGraph.ConnectPlayerTiles(this);
         StartSpawn();
@@ -161,18 +163,31 @@ public class EnemyBase : MonoBehaviour
         {
             foreach (var tile in chosenMove.tileKeys)
             {
-                if ((tile + i) % 4 == 0 && (((tile + i) - 1) % 4 == 3 || (tile + i) + 1 % 4 == 1)) break;
+                if ((tile + i) % 4 == 0 && (((tile + i) - 1) % 4 == 3 || (tile + i) + 1 % 4 == 1))
+                {
+                    break;
+                }
                 if (gridManager.GetPlayerTileDictionary().TryGetValue((tile + i), out GameObject cell))
                 {
+                    if (cell.GetComponent<Tile>().GetBeingAttacked())
+                    {
+                        break;
+                    }
                     tempWeight = cell.GetComponent<Tile>().GetTileWeight();
                 }
+
+                if (tempWeight > totalWeight)
+                {
+                    tileAttackAddition = i;
+                    totalWeight = tempWeight;
+                }
+                tempWeight = 0;
             }
-            if (tempWeight > totalWeight)
-            {
-                tileAttackAddition = i;
-                totalWeight = tempWeight;
-            }
-            tempWeight = 0;
+        }
+
+        foreach (var tileKey in chosenMove.tileKeys)
+        {
+            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Tile>().SetBeingAttacked(true);
         }
     }
 
@@ -205,6 +220,7 @@ public class EnemyBase : MonoBehaviour
         foreach (int tileKey in chosenMove.tileKeys)
         {
             gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Image>().color = Color.green;
+            gridManager.GetPlayerTileDictionary()[tileKey + tileAttackAddition].gameObject.GetComponent<Tile>().SetBeingAttacked(false);
         }
     }
 
@@ -276,5 +292,10 @@ public class EnemyBase : MonoBehaviour
     public New_Graph GetConnectionGraph()
     {
         return connectionGraph;
+    }
+
+    public Dictionary<int, GameObject> GetEnemyTileDic()
+    {
+        return enemyTileDictionary;
     }
 }
