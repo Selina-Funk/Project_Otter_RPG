@@ -171,7 +171,7 @@ public class EnemyBase : MonoBehaviour
                 {
                     if (cell.GetComponent<Tile>().GetBeingAttacked())
                     {
-                        break;
+                        continue;
                     }
                     tempWeight = cell.GetComponent<Tile>().GetTileWeight();
                 }
