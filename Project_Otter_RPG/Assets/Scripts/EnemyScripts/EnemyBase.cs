@@ -45,7 +45,7 @@ public class EnemyBase : MonoBehaviour
 
     private void Awake()
     {
-        instanceEnemyData = baseEnemyData;
+        instanceEnemyData = Instantiate(baseEnemyData);
         instanceEnemyData.enemyCurrentHealth = instanceEnemyData.enemyMaxHealth;
 
         gridManager = GameObject.Find("BattleManager").GetComponent<GridManager>();

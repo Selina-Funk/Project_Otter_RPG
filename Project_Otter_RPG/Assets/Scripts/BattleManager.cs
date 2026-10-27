@@ -80,6 +80,8 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < numOfEnemies; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, new Vector2(0, 0), Quaternion.identity, GameObject.Find("Attack_Canvas").gameObject.transform);
+            string newName = "Enemy" + i;
+            enemy.name = newName;
             enemyList.Add(enemy.GetComponent<EnemyBase>());
         }
     }
